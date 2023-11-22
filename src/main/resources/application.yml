@@ -8,3 +8,5 @@ spring:
 springdoc.swagger-ui.path: ${SWAGGER_URL:/docs}
 springdoc.default-produces-media-type: application/json
 springdoc.default-consumes-media-type: application/json
+swagger.username: ${SWAGGER_USERNAME:#{null}}
+swagger.password: ${SWAGGER_PASSWORD:#{null}}
