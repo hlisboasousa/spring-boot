@@ -15,6 +15,10 @@ public class Main {
         SpringApplication.run(Main.class, args);
     }
 
+    @GetMapping("/test")
+    public String TestMethod() {
+        return "response";
+    }
     @GetMapping("/greet")
     public GreetResponse greet() {
         GreetResponse response = new GreetResponse(

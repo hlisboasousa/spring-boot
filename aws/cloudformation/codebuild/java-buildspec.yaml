@@ -11,18 +11,18 @@ phases:
 
   post_build:
     commands:
-      - bash -c "if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"0/" ]; then exit 1; fi"
-      - URL="http://your-api-host/v3/api-docs"
-      - OPENAPI_JSON=$(curl -s $URL)
-      - API_ID="your-api-id"
-      - REGION="your-region"
-      - STAGE_NAME="your-stage-name"
-      - TMP_DIR="/tmp/api-gateway-update"
-      - mkdir -p $TMP_DIR
-      - echo $OPENAPI_JSON > $TMP_DIR/openapi.json
-      - aws apigateway import-rest-api --body file://$TMP_DIR/openapi.json --fail-on-warnings
-      - API_GATEWAY_ID=$(aws apigateway get-rest-apis --query "items[?name=='your-api-name'].id" --output text)
-      - aws apigateway create-deployment --rest-api-id $API_GATEWAY_ID --stage-name $STAGE_NAME
+#      - bash -c "if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"0/" ]; then exit 1; fi"
+#      - URL="http://your-api-host/v3/api-docs"
+#      - OPENAPI_JSON=$(curl -s $URL)
+#      - API_ID="your-api-id"
+#      - REGION="your-region"
+#      - STAGE_NAME="your-stage-name"
+#      - TMP_DIR="/tmp/api-gateway-update"
+#      - mkdir -p $TMP_DIR
+#      - echo $OPENAPI_JSON > $TMP_DIR/openapi.json
+#      - aws apigateway import-rest-api --body file://$TMP_DIR/openapi.json --fail-on-warnings
+#      - API_GATEWAY_ID=$(aws apigateway get-rest-apis --query "items[?name=='your-api-name'].id" --output text)
+#      - aws apigateway create-deployment --rest-api-id $API_GATEWAY_ID --stage-name $STAGE_NAME
 
 cache:
   paths:

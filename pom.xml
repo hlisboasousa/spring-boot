@@ -18,6 +18,8 @@
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 		<org.springdoc.version>2.1.0</org.springdoc.version>
+		<springdoc.version>2.2.0</springdoc.version>
+		<springdoc-openapi-maven-plugin.version>1.7</springdoc-openapi-maven-plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -25,14 +27,9 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>${org.springdoc.version}</version>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.7.0</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -40,13 +37,35 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>3.1.1</version>
 				<configuration>
-					<image>
-						<builder>paketobuildpacks/builder-jammy-base:latest</builder>
-					</image>
+					<jvmArguments>-Dspring.application.admin.enabled=true</jvmArguments>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>start</goal>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-maven-plugin</artifactId>
+				<version>1.4</version>
+
+				<configuration>
+					<apiDocsUrl>http://localhost:3000/v3/api-docs</apiDocsUrl>
+					<outputFileName>openapi.json</outputFileName>
+					<outputDir>target</outputDir>
+					<skip>false</skip>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
