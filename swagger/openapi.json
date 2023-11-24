@@ -1,24 +1,18 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "LLZ Garantidora - Administradora",
-    "description": "API Rest da aplicação LLZ Operation",
+    "title": "LLZ-DEV",
+    "description": "API Rest da aplicação LLZ DEV",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "https://administradora.dev.llzgarantidora.com",
-      "description": "Generated server url"
+      "url": "https://api.dev.llzgarantidora.com"
     }
   ],
   "paths": {
     "/api/administradoras/{administradoraId}": {
       "get": {
-        "tags": [
-          "Administradoras"
-        ],
-        "summary": "Obter administradora por ID",
-        "description": "Serviço responsável por realizar consulta de administradora por ID",
         "operationId": "findCompleteById",
         "parameters": [
           {
@@ -26,14 +20,13 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "200 response",
             "content": {
               "application/json": {
                 "schema": {
@@ -43,7 +36,7 @@
             }
           },
           "400": {
-            "description": "Bad Request",
+            "description": "400 response",
             "content": {
               "application/json": {
                 "schema": {
@@ -53,36 +46,50 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
+            "description": "401 response",
             "content": {}
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "500 response",
+            "content": {}
+          },
+          "403": {
+            "description": "403 response",
             "content": {}
           },
           "502": {
-            "description": "Bad Gateway"
+            "description": "502 response",
+            "content": {}
+          },
+          "404": {
+            "description": "404 response",
+            "content": {}
           },
           "503": {
-            "description": "Service Unavailable"
+            "description": "503 response",
+            "content": {}
           },
           "504": {
-            "description": "Gateway Timeout"
+            "description": "504 response",
+            "content": {}
           }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "get",
+          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras/{administradoraId}",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "requestParameters": {
+            "integration.request.path.administradoraId": "method.request.path.administradoraId"
+          },
+          "passthroughBehavior": "when_no_templates",
+          "type": "http"
         }
       },
       "put": {
-        "tags": [
-          "Administradoras"
-        ],
-        "summary": "Atualizar administradora",
-        "description": "Serviço responsável por realizar atualização de administradora",
         "operationId": "update",
         "parameters": [
           {
@@ -90,8 +97,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
             }
           }
         ],
@@ -107,7 +113,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "200 response",
             "content": {
               "application/json": {
                 "schema": {
@@ -117,7 +123,7 @@
             }
           },
           "400": {
-            "description": "Bad Request",
+            "description": "400 response",
             "content": {
               "application/json": {
                 "schema": {
@@ -127,36 +133,55 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
+            "description": "401 response",
             "content": {}
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "500 response",
+            "content": {}
+          },
+          "403": {
+            "description": "403 response",
             "content": {}
           },
           "502": {
-            "description": "Bad Gateway"
+            "description": "502 response",
+            "content": {}
+          },
+          "404": {
+            "description": "404 response",
+            "content": {}
           },
           "503": {
-            "description": "Service Unavailable"
+            "description": "503 response",
+            "content": {}
           },
           "504": {
-            "description": "Gateway Timeout"
+            "description": "504 response",
+            "content": {}
           }
+        },
+        "security": [
+          {
+            "auth-dev": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "put",
+          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras/{administradoraId}",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "requestParameters": {
+            "integration.request.path.administradoraId": "method.request.path.administradoraId"
+          },
+          "passthroughBehavior": "when_no_templates",
+          "type": "http"
         }
       },
       "delete": {
-        "tags": [
-          "Administradoras"
-        ],
-        "summary": "Deleção lógica de administradora",
-        "description": "Serviço responsável por realizar deleção lógica de administradora por ID",
         "operationId": "delete",
         "parameters": [
           {
@@ -164,14 +189,13 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "200 response",
             "content": {
               "application/json": {
                 "schema": {
@@ -181,7 +205,7 @@
             }
           },
           "400": {
-            "description": "Bad Request",
+            "description": "400 response",
             "content": {
               "application/json": {
                 "schema": {
@@ -191,338 +215,79 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
+            "description": "401 response",
             "content": {}
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "500 response",
             "content": {}
-          },
-          "502": {
-            "description": "Bad Gateway"
-          },
-          "503": {
-            "description": "Service Unavailable"
-          },
-          "504": {
-            "description": "Gateway Timeout"
-          }
-        }
-      }
-    },
-    "/api/administradoras": {
-      "get": {
-        "tags": [
-          "Administradoras"
-        ],
-        "summary": "Listar administradoras",
-        "description": "Serviço responsável por listar as administradoras",
-        "operationId": "findByCondition",
-        "parameters": [
-          {
-            "name": "Filtros",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/AdministradoraFiltros"
-            }
-          },
-          {
-            "name": "Paginacao",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/PageableRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseDefaultPageResponseAdministradoraConsultaResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseDefault"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
           },
           "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {}
-          },
-          "500": {
-            "description": "Internal Server Error",
+            "description": "403 response",
             "content": {}
           },
           "502": {
-            "description": "Bad Gateway"
+            "description": "502 response",
+            "content": {}
+          },
+          "404": {
+            "description": "404 response",
+            "content": {}
           },
           "503": {
-            "description": "Service Unavailable"
+            "description": "503 response",
+            "content": {}
           },
           "504": {
-            "description": "Gateway Timeout"
+            "description": "504 response",
+            "content": {}
           }
-        }
-      },
-      "post": {
-        "tags": [
-          "Administradoras"
-        ],
-        "summary": "Criar administradora",
-        "description": "Serviço responsável por criar nova administradora",
-        "operationId": "save",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AdministradoraRequest"
-              }
-            }
-          },
-          "required": true
         },
-        "responses": {
-          "201": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseDefaultAdministradoraResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseDefault"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {}
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {}
-          },
-          "502": {
-            "description": "Bad Gateway"
-          },
-          "503": {
-            "description": "Service Unavailable"
-          },
-          "504": {
-            "description": "Gateway Timeout"
-          }
-        }
-      }
-    },
-    "/api/administradoras/{administradoraId}/contas-bancarias": {
-      "get": {
-        "tags": [
-          "Conta Bancária"
-        ],
-        "summary": "Listar contas bancárias",
-        "description": "Serviço responsável por listar as contas bancárias da Administradora",
-        "operationId": "findAllByAdministradoraId",
-        "parameters": [
+        "security": [
           {
-            "name": "administradoraId",
-            "in": "path",
-            "description": "ID da Administradora",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
+            "auth-dev": []
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseDefaultListAdministradoraContaBancariaConsultaResponse"
-                }
-              }
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "delete",
+          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras/{administradoraId}",
+          "responses": {
+            "default": {
+              "statusCode": "200"
             }
           },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseDefault"
-                }
-              }
-            }
+          "requestParameters": {
+            "integration.request.path.administradoraId": "method.request.path.administradoraId"
           },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {}
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {}
-          },
-          "502": {
-            "description": "Bad Gateway"
-          },
-          "503": {
-            "description": "Service Unavailable"
-          },
-          "504": {
-            "description": "Gateway Timeout"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Conta Bancária"
-        ],
-        "summary": "Criar conta bancária",
-        "description": "Serviço responsável por criar nova conta bancária",
-        "operationId": "save_1",
-        "parameters": [
-          {
-            "name": "administradoraId",
-            "in": "path",
-            "description": "ID da Administradora",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AdministradoraContaBancariaRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseDefaultAdministradoraContaBancariaResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseDefault"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {}
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {}
-          },
-          "502": {
-            "description": "Bad Gateway"
-          },
-          "503": {
-            "description": "Service Unavailable"
-          },
-          "504": {
-            "description": "Gateway Timeout"
-          }
+          "passthroughBehavior": "when_no_templates",
+          "type": "http"
         }
       }
     },
     "/api/administradoras/{administradoraId}/contas-bancarias/{contaBancariaId}/principal": {
       "patch": {
-        "tags": [
-          "Conta Bancária"
-        ],
-        "summary": "Alterar flag principal de conta bancária",
-        "description": "Serviço responsável por realizar alteração da flag principal de conta bancária por ID",
         "operationId": "alteraContaBancariaPrincipal",
         "parameters": [
-          {
-            "name": "administradoraId",
-            "in": "path",
-            "description": "ID da Administradora",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          },
           {
             "name": "contaBancariaId",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
+            }
+          },
+          {
+            "name": "administradoraId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "200 response",
             "content": {
               "application/json": {
                 "schema": {
@@ -532,7 +297,7 @@
             }
           },
           "400": {
-            "description": "Bad Request",
+            "description": "400 response",
             "content": {
               "application/json": {
                 "schema": {
@@ -542,38 +307,151 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
+            "description": "401 response",
             "content": {}
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "500 response",
+            "content": {}
+          },
+          "403": {
+            "description": "403 response",
             "content": {}
           },
           "502": {
-            "description": "Bad Gateway"
+            "description": "502 response",
+            "content": {}
+          },
+          "404": {
+            "description": "404 response",
+            "content": {}
           },
           "503": {
-            "description": "Service Unavailable"
+            "description": "503 response",
+            "content": {}
           },
           "504": {
-            "description": "Gateway Timeout"
+            "description": "504 response",
+            "content": {}
           }
+        },
+        "security": [
+          {
+            "auth-dev": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "patch",
+          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras/{administradoraId}/contas-bancarias/{contaBancariaId}/principal",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "requestParameters": {
+            "integration.request.path.contaBancariaId": "method.request.path.contaBancariaId",
+            "integration.request.path.administradoraId": "method.request.path.administradoraId"
+          },
+          "passthroughBehavior": "when_no_templates",
+          "type": "http"
+        }
+      }
+    },
+    "/api/administradoras/{administradoraId}/contas-bancarias/{contaBancariaId}": {
+      "delete": {
+        "operationId": "delete_1",
+        "parameters": [
+          {
+            "name": "contaBancariaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "administradoraId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefaultVoid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefault"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "content": {}
+          },
+          "500": {
+            "description": "500 response",
+            "content": {}
+          },
+          "403": {
+            "description": "403 response",
+            "content": {}
+          },
+          "502": {
+            "description": "502 response",
+            "content": {}
+          },
+          "404": {
+            "description": "404 response",
+            "content": {}
+          },
+          "503": {
+            "description": "503 response",
+            "content": {}
+          },
+          "504": {
+            "description": "504 response",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "auth-dev": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "delete",
+          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras/{administradoraId}/contas-bancarias/{contaBancariaId}",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "requestParameters": {
+            "integration.request.path.contaBancariaId": "method.request.path.contaBancariaId",
+            "integration.request.path.administradoraId": "method.request.path.administradoraId"
+          },
+          "passthroughBehavior": "when_no_templates",
+          "type": "http"
         }
       }
     },
     "/api/administradoras/inativar/{administradoraId}": {
       "patch": {
-        "tags": [
-          "Administradoras"
-        ],
-        "summary": "Inativar administradora",
-        "description": "Serviço responsável por realizar inativação de administradora por ID",
         "operationId": "inativar",
         "parameters": [
           {
@@ -581,8 +459,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
             }
           }
         ],
@@ -598,7 +475,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "200 response",
             "content": {
               "application/json": {
                 "schema": {
@@ -608,7 +485,7 @@
             }
           },
           "400": {
-            "description": "Bad Request",
+            "description": "400 response",
             "content": {
               "application/json": {
                 "schema": {
@@ -618,38 +495,399 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
+            "description": "401 response",
             "content": {}
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "500 response",
+            "content": {}
+          },
+          "403": {
+            "description": "403 response",
             "content": {}
           },
           "502": {
-            "description": "Bad Gateway"
+            "description": "502 response",
+            "content": {}
+          },
+          "404": {
+            "description": "404 response",
+            "content": {}
           },
           "503": {
-            "description": "Service Unavailable"
+            "description": "503 response",
+            "content": {}
           },
           "504": {
-            "description": "Gateway Timeout"
+            "description": "504 response",
+            "content": {}
           }
+        },
+        "security": [
+          {
+            "auth-dev": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "patch",
+          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras/inativar/{administradoraId}",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "requestParameters": {
+            "integration.request.path.administradoraId": "method.request.path.administradoraId"
+          },
+          "passthroughBehavior": "when_no_templates",
+          "type": "http"
+        }
+      }
+    },
+    "/api/administradoras/{administradoraId}/contas-bancarias": {
+      "get": {
+        "operationId": "findAllByAdministradoraId",
+        "parameters": [
+          {
+            "name": "administradoraId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefaultListAdministradoraContaBancariaConsultaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefault"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "content": {}
+          },
+          "500": {
+            "description": "500 response",
+            "content": {}
+          },
+          "403": {
+            "description": "403 response",
+            "content": {}
+          },
+          "502": {
+            "description": "502 response",
+            "content": {}
+          },
+          "404": {
+            "description": "404 response",
+            "content": {}
+          },
+          "503": {
+            "description": "503 response",
+            "content": {}
+          },
+          "504": {
+            "description": "504 response",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "auth-dev": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "get",
+          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras/{administradoraId}/contas-bancarias",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "requestParameters": {
+            "integration.request.path.administradoraId": "method.request.path.administradoraId"
+          },
+          "passthroughBehavior": "when_no_templates",
+          "type": "http"
+        }
+      },
+      "post": {
+        "operationId": "save_1",
+        "parameters": [
+          {
+            "name": "administradoraId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdministradoraContaBancariaRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "201 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefaultAdministradoraContaBancariaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefault"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "content": {}
+          },
+          "500": {
+            "description": "500 response",
+            "content": {}
+          },
+          "403": {
+            "description": "403 response",
+            "content": {}
+          },
+          "502": {
+            "description": "502 response",
+            "content": {}
+          },
+          "404": {
+            "description": "404 response",
+            "content": {}
+          },
+          "503": {
+            "description": "503 response",
+            "content": {}
+          },
+          "504": {
+            "description": "504 response",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "auth-dev": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "post",
+          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras/{administradoraId}/contas-bancarias",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "requestParameters": {
+            "integration.request.path.administradoraId": "method.request.path.administradoraId"
+          },
+          "passthroughBehavior": "when_no_templates",
+          "type": "http"
+        }
+      }
+    },
+    "/api/administradoras": {
+      "get": {
+        "operationId": "findByCondition",
+        "parameters": [
+          {
+            "name": "Filtros",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Paginacao",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefaultPageResponseAdministradoraConsultaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefault"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "content": {}
+          },
+          "500": {
+            "description": "500 response",
+            "content": {}
+          },
+          "403": {
+            "description": "403 response",
+            "content": {}
+          },
+          "502": {
+            "description": "502 response",
+            "content": {}
+          },
+          "404": {
+            "description": "404 response",
+            "content": {}
+          },
+          "503": {
+            "description": "503 response",
+            "content": {}
+          },
+          "504": {
+            "description": "504 response",
+            "content": {}
+          }
+        },
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "get",
+          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "requestParameters": {
+            "integration.request.path.Filtros": "method.request.path.Filtros",
+            "integration.request.path.Paginacao": "method.request.path.Paginacao"
+          },
+          "passthroughBehavior": "when_no_templates",
+          "type": "http"
+        }
+      },
+      "post": {
+        "operationId": "save",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdministradoraRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "201 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefaultAdministradoraResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "400 response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefault"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "401 response",
+            "content": {}
+          },
+          "500": {
+            "description": "500 response",
+            "content": {}
+          },
+          "403": {
+            "description": "403 response",
+            "content": {}
+          },
+          "502": {
+            "description": "502 response",
+            "content": {}
+          },
+          "404": {
+            "description": "404 response",
+            "content": {}
+          },
+          "503": {
+            "description": "503 response",
+            "content": {}
+          },
+          "504": {
+            "description": "504 response",
+            "content": {}
+          }
+        },
+        "security": [
+          {
+            "auth-dev": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "post",
+          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "requestParameters": {},
+          "passthroughBehavior": "when_no_templates",
+          "type": "http"
         }
       }
     },
     "/api/administradoras/{administradoraId}/internal": {
       "get": {
-        "tags": [
-          "Administradoras"
-        ],
-        "summary": "Obter administradora por ID",
-        "description": "Serviço responsável por realizar consulta de administradora por ID e não retonar dados de entidades relacionadas",
         "operationId": "findInternalById",
         "parameters": [
           {
@@ -657,14 +895,13 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "200 response",
             "content": {
               "application/json": {
                 "schema": {
@@ -674,7 +911,7 @@
             }
           },
           "400": {
-            "description": "Bad Request",
+            "description": "400 response",
             "content": {
               "application/json": {
                 "schema": {
@@ -684,103 +921,52 @@
             }
           },
           "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
+            "description": "401 response",
             "content": {}
           },
           "500": {
-            "description": "Internal Server Error",
+            "description": "500 response",
             "content": {}
-          },
-          "502": {
-            "description": "Bad Gateway"
-          },
-          "503": {
-            "description": "Service Unavailable"
-          },
-          "504": {
-            "description": "Gateway Timeout"
-          }
-        }
-      }
-    },
-    "/api/administradoras/{administradoraId}/contas-bancarias/{contaBancariaId}": {
-      "delete": {
-        "tags": [
-          "Conta Bancária"
-        ],
-        "summary": "Deleção lógica de conta bancária",
-        "description": "Serviço responsável por realizar deleção lógica de conta bancária por ID",
-        "operationId": "delete_1",
-        "parameters": [
-          {
-            "name": "administradoraId",
-            "in": "path",
-            "description": "ID da Administradora",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "contaBancariaId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseDefaultVoid"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ResponseDefault"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
           },
           "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {}
-          },
-          "500": {
-            "description": "Internal Server Error",
+            "description": "403 response",
             "content": {}
           },
           "502": {
-            "description": "Bad Gateway"
+            "description": "502 response",
+            "content": {}
+          },
+          "404": {
+            "description": "404 response",
+            "content": {}
           },
           "503": {
-            "description": "Service Unavailable"
+            "description": "503 response",
+            "content": {}
           },
           "504": {
-            "description": "Gateway Timeout"
+            "description": "504 response",
+            "content": {}
           }
+        },
+        "security": [
+          {
+            "auth-dev": []
+          }
+        ],
+        "x-amazon-apigateway-integration": {
+          "httpMethod": "get",
+          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras/{administradoraId}/internal",
+          "responses": {
+            "default": {
+              "statusCode": "200"
+            }
+          },
+          "requestParameters": {
+            "integration.request.path.administradoraId": "method.request.path.administradoraId"
+          },
+          "passthroughBehavior": "when_no_templates",
+          "type": "http"
         }
       }
     }
@@ -1804,10 +1990,11 @@
       }
     },
     "securitySchemes": {
-      "bearer-key": {
-        "type": "http",
-        "scheme": "bearer",
-        "bearerFormat": "JWT"
+      "auth-llz": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header",
+        "x-amazon-apigateway-authtype": "cognito_user_pools"
       }
     }
   }

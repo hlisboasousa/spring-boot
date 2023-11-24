@@ -23,15 +23,8 @@ phases:
             runas: ec2-user
         AfterInstall:
           - location: |
-              aws apigateway put-rest-api \
-                --rest-api-id he6ttylibe \
-                --mode merge \
-                --body file://swagger/openapi.json \
-                --region us-east-1
-              aws apigateway create-deployment \
-                --rest-api-id he6ttylibe \
-                --stage-name dev \
-                --region us-east-1
+              ./swagger/apigateway-formatter.sh
+              ./swagger/swagger-ui-update.sh
             timeout: 60
             runas: ec2-user
 
