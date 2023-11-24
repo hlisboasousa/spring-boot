@@ -10,19 +10,30 @@ phases:
       - echo ...Java build completed on `date`.
 
   post_build:
-    commands:
-#      - bash -c "if [ /"$CODEBUILD_BUILD_SUCCEEDING/" == /"0/" ]; then exit 1; fi"
-#      - URL="http://your-api-host/v3/api-docs"
-#      - OPENAPI_JSON=$(curl -s $URL)
-#      - API_ID="your-api-id"
-#      - REGION="your-region"
-#      - STAGE_NAME="your-stage-name"
-#      - TMP_DIR="/tmp/api-gateway-update"
-#      - mkdir -p $TMP_DIR
-#      - echo $OPENAPI_JSON > $TMP_DIR/openapi.json
-#      - aws apigateway import-rest-api --body file://$TMP_DIR/openapi.json --fail-on-warnings
-#      - API_GATEWAY_ID=$(aws apigateway get-rest-apis --query "items[?name=='your-api-name'].id" --output text)
-#      - aws apigateway create-deployment --rest-api-id $API_GATEWAY_ID --stage-name $STAGE_NAME
+      commands:
+      version: 0.0
+      os: linux
+      files:
+        - source: /
+          destination: /home/ec2-user/spring-boot-app
+      hooks:
+        ApplicationStart:
+          - location: java -jar /home/ec2-user/spring-boot-app.jar
+            timeout: 60
+            runas: ec2-user
+        AfterInstall:
+          - location: |
+              aws apigateway put-rest-api \
+                --rest-api-id he6ttylibe \
+                --mode merge \
+                --body file://swagger/openapi.json \
+                --region us-east-1
+              aws apigateway create-deployment \
+                --rest-api-id he6ttylibe \
+                --stage-name dev \
+                --region us-east-1
+            timeout: 60
+            runas: ec2-user
 
 cache:
   paths:

@@ -1,0 +1,84 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/test2": {
+      "get": {
+        "tags": [
+          "main"
+        ],
+        "operationId": "TestMethod",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/greetss": {
+      "get": {
+        "tags": [
+          "main"
+        ],
+        "operationId": "greet",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GreetResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "GreetResponse": {
+        "type": "object",
+        "properties": {
+          "greet": {
+            "type": "string"
+          },
+          "favProgrammingLanguages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "person": {
+            "$ref": "#/components/schemas/Person"
+          }
+        }
+      },
+      "Person": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
