@@ -1,52 +1,785 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "OpenAPI definition",
-    "version": "v0"
+    "title": "LLZ Garantidora - Administradora",
+    "description": "API Rest da aplicação LLZ Operation",
+    "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "http://localhost:3000",
+      "url": "https://administradora.dev.llzgarantidora.com",
       "description": "Generated server url"
     }
   ],
   "paths": {
-    "/test2": {
+    "/api/administradoras/{administradoraId}": {
       "get": {
         "tags": [
-          "main"
+          "Administradoras"
         ],
-        "operationId": "TestMethod",
+        "summary": "Obter administradora por ID",
+        "description": "Serviço responsável por realizar consulta de administradora por ID",
+        "operationId": "findCompleteById",
+        "parameters": [
+          {
+            "name": "administradoraId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/ResponseDefaultAdministradoraDetalheResponse"
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefault"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          },
+          "502": {
+            "description": "Bad Gateway"
+          },
+          "503": {
+            "description": "Service Unavailable"
+          },
+          "504": {
+            "description": "Gateway Timeout"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Administradoras"
+        ],
+        "summary": "Atualizar administradora",
+        "description": "Serviço responsável por realizar atualização de administradora",
+        "operationId": "update",
+        "parameters": [
+          {
+            "name": "administradoraId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdministradoraRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefaultAdministradoraResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefault"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          },
+          "502": {
+            "description": "Bad Gateway"
+          },
+          "503": {
+            "description": "Service Unavailable"
+          },
+          "504": {
+            "description": "Gateway Timeout"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Administradoras"
+        ],
+        "summary": "Deleção lógica de administradora",
+        "description": "Serviço responsável por realizar deleção lógica de administradora por ID",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "name": "administradoraId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefaultVoid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefault"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          },
+          "502": {
+            "description": "Bad Gateway"
+          },
+          "503": {
+            "description": "Service Unavailable"
+          },
+          "504": {
+            "description": "Gateway Timeout"
           }
         }
       }
     },
-    "/greetss": {
+    "/api/administradoras": {
       "get": {
         "tags": [
-          "main"
+          "Administradoras"
         ],
-        "operationId": "greet",
+        "summary": "Listar administradoras",
+        "description": "Serviço responsável por listar as administradoras",
+        "operationId": "findByCondition",
+        "parameters": [
+          {
+            "name": "Filtros",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/AdministradoraFiltros"
+            }
+          },
+          {
+            "name": "Paginacao",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/PageableRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GreetResponse"
+                  "$ref": "#/components/schemas/ResponseDefaultPageResponseAdministradoraConsultaResponse"
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefault"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          },
+          "502": {
+            "description": "Bad Gateway"
+          },
+          "503": {
+            "description": "Service Unavailable"
+          },
+          "504": {
+            "description": "Gateway Timeout"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Administradoras"
+        ],
+        "summary": "Criar administradora",
+        "description": "Serviço responsável por criar nova administradora",
+        "operationId": "save",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdministradoraRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefaultAdministradoraResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefault"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          },
+          "502": {
+            "description": "Bad Gateway"
+          },
+          "503": {
+            "description": "Service Unavailable"
+          },
+          "504": {
+            "description": "Gateway Timeout"
+          }
+        }
+      }
+    },
+    "/api/administradoras/{administradoraId}/contas-bancarias": {
+      "get": {
+        "tags": [
+          "Conta Bancária"
+        ],
+        "summary": "Listar contas bancárias",
+        "description": "Serviço responsável por listar as contas bancárias da Administradora",
+        "operationId": "findAllByAdministradoraId",
+        "parameters": [
+          {
+            "name": "administradoraId",
+            "in": "path",
+            "description": "ID da Administradora",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefaultListAdministradoraContaBancariaConsultaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefault"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          },
+          "502": {
+            "description": "Bad Gateway"
+          },
+          "503": {
+            "description": "Service Unavailable"
+          },
+          "504": {
+            "description": "Gateway Timeout"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Conta Bancária"
+        ],
+        "summary": "Criar conta bancária",
+        "description": "Serviço responsável por criar nova conta bancária",
+        "operationId": "save_1",
+        "parameters": [
+          {
+            "name": "administradoraId",
+            "in": "path",
+            "description": "ID da Administradora",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdministradoraContaBancariaRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefaultAdministradoraContaBancariaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefault"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          },
+          "502": {
+            "description": "Bad Gateway"
+          },
+          "503": {
+            "description": "Service Unavailable"
+          },
+          "504": {
+            "description": "Gateway Timeout"
+          }
+        }
+      }
+    },
+    "/api/administradoras/{administradoraId}/contas-bancarias/{contaBancariaId}/principal": {
+      "patch": {
+        "tags": [
+          "Conta Bancária"
+        ],
+        "summary": "Alterar flag principal de conta bancária",
+        "description": "Serviço responsável por realizar alteração da flag principal de conta bancária por ID",
+        "operationId": "alteraContaBancariaPrincipal",
+        "parameters": [
+          {
+            "name": "administradoraId",
+            "in": "path",
+            "description": "ID da Administradora",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "contaBancariaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefaultVoid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefault"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          },
+          "502": {
+            "description": "Bad Gateway"
+          },
+          "503": {
+            "description": "Service Unavailable"
+          },
+          "504": {
+            "description": "Gateway Timeout"
+          }
+        }
+      }
+    },
+    "/api/administradoras/inativar/{administradoraId}": {
+      "patch": {
+        "tags": [
+          "Administradoras"
+        ],
+        "summary": "Inativar administradora",
+        "description": "Serviço responsável por realizar inativação de administradora por ID",
+        "operationId": "inativar",
+        "parameters": [
+          {
+            "name": "administradoraId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdministradoraInativarRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefaultVoid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefault"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          },
+          "502": {
+            "description": "Bad Gateway"
+          },
+          "503": {
+            "description": "Service Unavailable"
+          },
+          "504": {
+            "description": "Gateway Timeout"
+          }
+        }
+      }
+    },
+    "/api/administradoras/{administradoraId}/internal": {
+      "get": {
+        "tags": [
+          "Administradoras"
+        ],
+        "summary": "Obter administradora por ID",
+        "description": "Serviço responsável por realizar consulta de administradora por ID e não retonar dados de entidades relacionadas",
+        "operationId": "findInternalById",
+        "parameters": [
+          {
+            "name": "administradoraId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefaultAdministradoraInternalResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefault"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          },
+          "502": {
+            "description": "Bad Gateway"
+          },
+          "503": {
+            "description": "Service Unavailable"
+          },
+          "504": {
+            "description": "Gateway Timeout"
+          }
+        }
+      }
+    },
+    "/api/administradoras/{administradoraId}/contas-bancarias/{contaBancariaId}": {
+      "delete": {
+        "tags": [
+          "Conta Bancária"
+        ],
+        "summary": "Deleção lógica de conta bancária",
+        "description": "Serviço responsável por realizar deleção lógica de conta bancária por ID",
+        "operationId": "delete_1",
+        "parameters": [
+          {
+            "name": "administradoraId",
+            "in": "path",
+            "description": "ID da Administradora",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "contaBancariaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefaultVoid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseDefault"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {}
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {}
+          },
+          "502": {
+            "description": "Bad Gateway"
+          },
+          "503": {
+            "description": "Service Unavailable"
+          },
+          "504": {
+            "description": "Gateway Timeout"
           }
         }
       }
@@ -54,30 +787,1027 @@
   },
   "components": {
     "schemas": {
-      "GreetResponse": {
+      "StatusDefaultResponse": {
         "type": "object",
         "properties": {
-          "greet": {
+          "erro": {
+            "type": "boolean"
+          },
+          "codigo": {
             "type": "string"
           },
-          "favProgrammingLanguages": {
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "AdministradoraRequest": {
+        "required": [
+          "cnpj"
+        ],
+        "type": "object",
+        "properties": {
+          "matriz": {
+            "$ref": "#/components/schemas/MatrizRequest"
+          },
+          "regional": {
+            "$ref": "#/components/schemas/RegionalRequest"
+          },
+          "dataInicioContrato": {
+            "type": "string",
+            "format": "date"
+          },
+          "dataFimContrato": {
+            "type": "string",
+            "format": "date"
+          },
+          "razaoSocial": {
+            "type": "string"
+          },
+          "nomeFantasia": {
+            "type": "string"
+          },
+          "cnpj": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "parceira": {
+            "type": "boolean"
+          },
+          "observacao": {
+            "type": "string"
+          },
+          "tipoDadoBancario": {
+            "type": "string",
+            "enum": [
+              "BOLETO",
+              "TRANS_BANCARIA_ADMINISTRADORA",
+              "TRANS_BANCARIA_CONDOMINIO"
+            ]
+          },
+          "endereco": {
+            "$ref": "#/components/schemas/EnderecoRequest"
+          },
+          "telefones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelefoneRequest"
+            }
+          },
+          "responsaveis": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PessoaRequest"
+            }
+          },
+          "condominios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CondominioAssociadoRequest"
+            }
+          },
+          "documentos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoRequest"
+            }
+          }
+        }
+      },
+      "CondominioAssociadoRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "DocumentoRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "CONTRATO_SOCIAL",
+              "ULTIMA_ALTERACAO_CONTRATUAL",
+              "COMPROVANTE_ENDERECO_EMPESA",
+              "TERMO_PARCERIA",
+              "DOCUMENTO_FOTO_RESPONSAVEL_EMPRESA",
+              "CARTAO_CNPJ",
+              "DADOS_BANCARIOS",
+              "CNPJ_CONDOMINIO",
+              "CONVENCAO",
+              "ATA",
+              "RG_CNH_SINDICO",
+              "COMPROVANTE_ENDERECO_SINDICO",
+              "CADASTRO_UNIDADES"
+            ]
+          },
+          "nome": {
+            "type": "string"
+          },
+          "dataValidade": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "EnderecoRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoRequest"
+          },
+          "cep": {
+            "type": "string"
+          },
+          "logradouro": {
+            "type": "string"
+          },
+          "numero": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "complemento": {
+            "type": "string"
+          },
+          "cidade": {
+            "type": "string"
+          },
+          "bairro": {
+            "type": "string"
+          }
+        }
+      },
+      "EstadoRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "MatrizRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PessoaRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "dtNascimento": {
+            "type": "string",
+            "format": "date"
+          },
+          "email": {
+            "type": "string"
+          },
+          "telefones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelefoneRequest"
+            }
+          },
+          "tipoPessoa": {
+            "type": "string",
+            "enum": [
+              "RES_ADM",
+              "RES_COM",
+              "RES_CAP",
+              "SIN",
+              "CON",
+              "PRO",
+              "INQ"
+            ]
+          }
+        }
+      },
+      "RegionalRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "TelefoneRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "administradoraId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "RESIDENCIAL",
+              "COMERCIAL",
+              "CELULAR",
+              "WHATS_APP"
+            ]
+          },
+          "codPais": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ddd": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numero": {
+            "type": "string"
+          }
+        }
+      },
+      "ResponseDefault": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "object"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusDefaultResponse"
+          }
+        }
+      },
+      "AdministradoraResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "matriz": {
+            "$ref": "#/components/schemas/MatrizResponse"
+          },
+          "regional": {
+            "$ref": "#/components/schemas/RegionalResponse"
+          },
+          "dataInicioContrato": {
+            "type": "string",
+            "format": "date"
+          },
+          "dataFimContrato": {
+            "type": "string",
+            "format": "date"
+          },
+          "razaoSocial": {
+            "type": "string"
+          },
+          "nomeFantasia": {
+            "type": "string"
+          },
+          "cnpj": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "parceira": {
+            "type": "boolean"
+          },
+          "observacao": {
+            "type": "string"
+          },
+          "tipoDadoBancario": {
+            "type": "string",
+            "enum": [
+              "BOLETO",
+              "TRANS_BANCARIA_ADMINISTRADORA",
+              "TRANS_BANCARIA_CONDOMINIO"
+            ]
+          },
+          "motivoInativacao": {
+            "type": "string"
+          },
+          "situacao": {
+            "type": "string",
+            "enum": [
+              "ATIVO",
+              "INATIVO",
+              "PENDENTE",
+              "DELETADO",
+              "NAO_LANCADO",
+              "LANCADO",
+              "PROCESSADO",
+              "PROCESSADO_COM_FALHA",
+              "EM_PROCESSAMENTO",
+              "FALHA",
+              "AGUARDANDO_FINALIZACAO",
+              "AGUARDANDO_EMISSAO",
+              "AGUARDANDO_PAGAMENTO",
+              "LIQUIDADO",
+              "VENCIDO"
+            ]
+          }
+        }
+      },
+      "MatrizResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "RegionalResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "ResponseDefaultAdministradoraResponse": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "$ref": "#/components/schemas/AdministradoraResponse"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusDefaultResponse"
+          }
+        }
+      },
+      "AdministradoraContaBancariaRequest": {
+        "required": [
+          "agencia",
+          "banco",
+          "cnpj",
+          "conta",
+          "principal",
+          "tipo",
+          "titularConta"
+        ],
+        "type": "object",
+        "properties": {
+          "cnpj": {
+            "type": "string"
+          },
+          "titularConta": {
+            "type": "string"
+          },
+          "banco": {
+            "$ref": "#/components/schemas/BancoRequest"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "CONTA_CORRENTE",
+              "CONTA_POUPANCA"
+            ]
+          },
+          "agencia": {
+            "type": "string"
+          },
+          "conta": {
+            "type": "string"
+          },
+          "operacao": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "principal": {
+            "type": "boolean"
+          }
+        }
+      },
+      "BancoRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "AdministradoraContaBancariaResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "cnpj": {
+            "type": "string"
+          },
+          "titularConta": {
+            "type": "string"
+          },
+          "banco": {
+            "$ref": "#/components/schemas/BancoResponse"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "CONTA_CORRENTE",
+              "CONTA_POUPANCA"
+            ]
+          },
+          "agencia": {
+            "type": "string"
+          },
+          "conta": {
+            "type": "string"
+          },
+          "operacao": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "principal": {
+            "type": "boolean"
+          }
+        }
+      },
+      "BancoResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "codBacen": {
+            "type": "string"
+          },
+          "nome": {
+            "type": "string"
+          }
+        }
+      },
+      "ResponseDefaultAdministradoraContaBancariaResponse": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "$ref": "#/components/schemas/AdministradoraContaBancariaResponse"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusDefaultResponse"
+          }
+        }
+      },
+      "ResponseDefaultVoid": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "object"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusDefaultResponse"
+          }
+        }
+      },
+      "AdministradoraInativarRequest": {
+        "required": [
+          "motivo"
+        ],
+        "type": "object",
+        "properties": {
+          "motivo": {
+            "type": "string"
+          }
+        }
+      },
+      "AdministradoraFiltros": {
+        "type": "object",
+        "properties": {
+          "query": {
             "type": "array",
             "items": {
               "type": "string"
             }
           },
-          "person": {
-            "$ref": "#/components/schemas/Person"
-          }
-        }
-      },
-      "Person": {
-        "type": "object",
-        "properties": {
-          "name": {
+          "parceira": {
+            "type": "boolean"
+          },
+          "situacao": {
             "type": "string"
           }
         }
+      },
+      "PageableRequest": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "orderBy": {
+            "type": "string"
+          },
+          "sort": {
+            "type": "string"
+          }
+        }
+      },
+      "AdministradoraConsultaResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "razaoSocial": {
+            "type": "string"
+          },
+          "cnpj": {
+            "type": "string"
+          },
+          "endereco": {
+            "$ref": "#/components/schemas/EnderecoResponse"
+          },
+          "parceira": {
+            "type": "boolean"
+          },
+          "qtdCondominios": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalReceitasCondominios": {
+            "type": "number",
+            "format": "double"
+          },
+          "motivoInativacao": {
+            "type": "string"
+          },
+          "situacao": {
+            "type": "string",
+            "enum": [
+              "ATIVO",
+              "INATIVO",
+              "PENDENTE",
+              "DELETADO",
+              "NAO_LANCADO",
+              "LANCADO",
+              "PROCESSADO",
+              "PROCESSADO_COM_FALHA",
+              "EM_PROCESSAMENTO",
+              "FALHA",
+              "AGUARDANDO_FINALIZACAO",
+              "AGUARDANDO_EMISSAO",
+              "AGUARDANDO_PAGAMENTO",
+              "LIQUIDADO",
+              "VENCIDO"
+            ]
+          }
+        }
+      },
+      "EnderecoResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "estado": {
+            "$ref": "#/components/schemas/EstadoResponse"
+          },
+          "cep": {
+            "type": "string"
+          },
+          "logradouro": {
+            "type": "string"
+          },
+          "numero": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "complemento": {
+            "type": "string"
+          },
+          "cidade": {
+            "type": "string"
+          },
+          "bairro": {
+            "type": "string"
+          }
+        }
+      },
+      "EstadoResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "uf": {
+            "type": "string"
+          },
+          "pais": {
+            "type": "string"
+          },
+          "regiao": {
+            "type": "string"
+          }
+        }
+      },
+      "PageResponseAdministradoraConsultaResponse": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdministradoraConsultaResponse"
+            }
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
+          },
+          "empty": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ResponseDefaultPageResponseAdministradoraConsultaResponse": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "$ref": "#/components/schemas/PageResponseAdministradoraConsultaResponse"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusDefaultResponse"
+          }
+        }
+      },
+      "AdministradoraDetalheResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "dataInicioContrato": {
+            "type": "string",
+            "format": "date"
+          },
+          "dataFimContrato": {
+            "type": "string",
+            "format": "date"
+          },
+          "razaoSocial": {
+            "type": "string"
+          },
+          "nomeFantasia": {
+            "type": "string"
+          },
+          "cnpj": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "parceira": {
+            "type": "boolean"
+          },
+          "observacao": {
+            "type": "string"
+          },
+          "endereco": {
+            "$ref": "#/components/schemas/EnderecoResponse"
+          },
+          "tipoDadoBancario": {
+            "type": "string",
+            "enum": [
+              "BOLETO",
+              "TRANS_BANCARIA_ADMINISTRADORA",
+              "TRANS_BANCARIA_CONDOMINIO"
+            ]
+          },
+          "contasBancarias": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdministradoraContaBancariaResponse"
+            }
+          },
+          "telefones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelefoneResponse"
+            }
+          },
+          "responsaveis": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PessoaResponse"
+            }
+          },
+          "documentos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentoResponse"
+            }
+          },
+          "condominios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CondominioAssociadoResponse"
+            }
+          },
+          "motivoInativacao": {
+            "type": "string"
+          },
+          "situacao": {
+            "type": "string",
+            "enum": [
+              "ATIVO",
+              "INATIVO",
+              "PENDENTE",
+              "DELETADO",
+              "NAO_LANCADO",
+              "LANCADO",
+              "PROCESSADO",
+              "PROCESSADO_COM_FALHA",
+              "EM_PROCESSAMENTO",
+              "FALHA",
+              "AGUARDANDO_FINALIZACAO",
+              "AGUARDANDO_EMISSAO",
+              "AGUARDANDO_PAGAMENTO",
+              "LIQUIDADO",
+              "VENCIDO"
+            ]
+          }
+        }
+      },
+      "CondominioAssociadoResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "razaoSocial": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "telefones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelefoneResponse"
+            }
+          }
+        }
+      },
+      "DocumentoResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "CONTRATO_SOCIAL",
+              "ULTIMA_ALTERACAO_CONTRATUAL",
+              "COMPROVANTE_ENDERECO_EMPESA",
+              "TERMO_PARCERIA",
+              "DOCUMENTO_FOTO_RESPONSAVEL_EMPRESA",
+              "CARTAO_CNPJ",
+              "DADOS_BANCARIOS",
+              "CNPJ_CONDOMINIO",
+              "CONVENCAO",
+              "ATA",
+              "RG_CNH_SINDICO",
+              "COMPROVANTE_ENDERECO_SINDICO",
+              "CADASTRO_UNIDADES"
+            ]
+          },
+          "nome": {
+            "type": "string"
+          },
+          "dataValidade": {
+            "type": "string",
+            "format": "date"
+          },
+          "dataCadastro": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "PessoaResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "matricula": {
+            "type": "string"
+          },
+          "dtNascimento": {
+            "type": "string",
+            "format": "date"
+          },
+          "email": {
+            "type": "string"
+          },
+          "telefones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TelefoneResponse"
+            }
+          }
+        }
+      },
+      "ResponseDefaultAdministradoraDetalheResponse": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "$ref": "#/components/schemas/AdministradoraDetalheResponse"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusDefaultResponse"
+          }
+        }
+      },
+      "TelefoneResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "RESIDENCIAL",
+              "COMERCIAL",
+              "CELULAR",
+              "WHATS_APP"
+            ]
+          },
+          "codPais": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ddd": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numero": {
+            "type": "string"
+          }
+        }
+      },
+      "AdministradoraInternalResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "razaoSocial": {
+            "type": "string"
+          },
+          "cnpj": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "parceira": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ResponseDefaultAdministradoraInternalResponse": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "$ref": "#/components/schemas/AdministradoraInternalResponse"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusDefaultResponse"
+          }
+        }
+      },
+      "AdministradoraContaBancariaConsultaResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "cnpj": {
+            "type": "string"
+          },
+          "titularConta": {
+            "type": "string"
+          },
+          "banco": {
+            "$ref": "#/components/schemas/BancoResponse"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "CONTA_CORRENTE",
+              "CONTA_POUPANCA"
+            ]
+          },
+          "agencia": {
+            "type": "string"
+          },
+          "conta": {
+            "type": "string"
+          },
+          "operacao": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "principal": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ResponseDefaultListAdministradoraContaBancariaConsultaResponse": {
+        "type": "object",
+        "properties": {
+          "response": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdministradoraContaBancariaConsultaResponse"
+            }
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatusDefaultResponse"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearer-key": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
