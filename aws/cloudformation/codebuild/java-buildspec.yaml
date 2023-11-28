@@ -10,4 +10,7 @@ phases:
       - echo ...Java build completed on `date`.
 
   post_build:
-  
+    commands:
+      - cd swagger
+      - chmod +x apigateway-update.sh
+      - ./apigateway-update.sh dev
