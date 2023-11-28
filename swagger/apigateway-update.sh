@@ -2,27 +2,20 @@
 
 # This script does the following:
 #   - formats the OpenAPI file to be compatible with API Gateway. 
-#   - updates and deploys the API Gateway to the environment provided as argument.
+#   - updates the API Gateway definition.
+#   - deploys the API Gateway to the stage environment provided as argument
 #   - updates the Swagger UI docs in S3.
 
-if [ -z "$1" ]; then
-    echo "Usage: $0 <env>"
+SWAGGER_BUCKET="$ENV-api-swagger"
+
+API_ID=$(aws apigateway get-rest-apis --query 'items[?name==`LLZ-DEV`].[id]' --output text)
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to get the API ID."
     exit 1
 fi
 
-ENV="$1"
-SERVICE_NAME="administradora"
-API_ID=$(aws apigateway get-rest-apis --query 'items[?name==`LLZ-DEV`].[id]' --output text)
-BASE_URI="https://${SERVICE_NAME}.$ENV.llzgarantidora.com"
-OPENAPI_JSON_PATH="openapi.json"
-
-BUCKET_NAME="dev-api-swagger"
-DOCS_DIR="$BUCKET_NAME/docs"
-DOCS_LIST_JSON="$BUCKET_NAME/docs-list.json"
-
-
-# Function to process each path in the OpenAPI file
-process_path() {
+# Function to process each path in the OpenAPI file and to add the aws-apigateway-integration block
+insert_aws_integration() {
   local path_name="$1"
   local path_data="$2"
 
@@ -73,7 +66,7 @@ openapi_data=$(cat "$OPENAPI_JSON_PATH")
 while IFS= read -r path_entry; do
   path_name=$(echo "$path_entry" | jq -r '.key')
   path_data=$(echo "$path_entry" | jq -c -r '.value')
-  process_path "$path_name" "$path_data"
+  insert_aws_integration "$path_name" "$path_data"
 done <<< "$paths"
 
 # Add/overwrite the securitySchemes object directly
@@ -85,18 +78,14 @@ security_schemes='{
     "x-amazon-apigateway-authtype": "cognito_user_pools"
   }
 }'
-# Check if "components" key exists in the original OpenAPI data
 if [ "$(echo "$openapi_data" | jq -c '.components')" != "null" ]; then
-  # Add/overwrite the securitySchemes object directly within the existing components object
   openapi_data=$(echo "$openapi_data" | jq ".components.securitySchemes = $security_schemes")
 else
-  # If "components" key does not exist, create it along with securitySchemes
   openapi_data=$(echo "$openapi_data" | jq ".components = {\"securitySchemes\": $security_schemes}")
 fi
 
 # Check if openapi_data is not empty before overwriting the file
 if [ -n "$openapi_data" ]; then
-  # Overwrite the original OpenAPI file
   echo "$openapi_data" > "$OPENAPI_JSON_PATH"
   echo "openapi.json formatted succesfully."
 else
@@ -104,8 +93,30 @@ else
   exit 1
 fi
 
-aws apigateway put-rest-api --rest-api-id "$API_ID" --mode overwrite --body "fileb://openapi.json" > /dev/null
+# Download the current API definition from API Gateway
+aws apigateway get-export --rest-api-id "$API_ID" --stage-name "$ENV" --export-type swagger --parameters extensions='apigateway' old-openapi.json
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to get the API definition."
+    exit 1
+fi
 
+# Merge the new API definition
+# Overwriting the paths object directly based on the service name (e.g. /api/administradoras)
+jq --argjson new "$openapi_data" --argjson old "$(cat old-openapi.json)" '
+  ($new | .paths) as $newPaths |
+  ($old | .paths) as $oldPaths |
+  .paths = ($newPaths | reduce keys[] as $key (
+    $oldPaths;
+    if ($key | startswith("$BASE_PATH")) then
+      .[$key] = $newPaths[$key]
+    else
+      .
+    end
+  ))
+' old-openapi.json > $OPENAPI_JSON_PATH
+
+# Update API Gateway
+aws apigateway put-rest-api --rest-api-id "$API_ID" --mode overwrite --body "fileb://$OPENAPI_JSON_PATH" > /dev/null
 if [ $? -ne 0 ]; then
     echo "Error: Failed to update the API."
     exit 1
@@ -113,8 +124,8 @@ else
     echo "API updated successfully."
 fi
 
+# Deploy API Gateway
 aws apigateway create-deployment --rest-api-id "$API_ID" --stage-name "$ENV" > /dev/null
-
 if [ $? -ne 0 ]; then
     echo "Error: Failed to deploy the API."
     exit 1
@@ -123,31 +134,29 @@ else
 fi
 
 # Update Swagger-UI on S3
-
-aws s3 cp "$OPENAPI_JSON_PATH" "s3://$DOCS_DIR/$SERVICE_NAME.json"
+aws s3 cp "$OPENAPI_JSON_PATH" "s3://$SWAGGER_BUCKET/docs/$ECS_SERVICE_NAME.json"
+if [ $? -ne 0 ]; then
+    echo "Error: Swagger UI update - uploading OpenAPI file."
+    exit 1
+fi
 
 # Download the current docs-list.json file from S3
-aws s3 cp "s3://$DOCS_LIST_JSON" "current-docs-list.json"
-
-# Check if the download was successful
+aws s3 cp "s3://$SWAGGER_BUCKET/docs-list.json" "current-docs-list.json"
 if [ $? -ne 0 ]; then
     echo "Error: Swagger UI update - downloading current docs list."
     exit 1
 fi
 
-# Add the new entry to the docs list
-new_entry="{\"url\": \"docs/$SERVICE_NAME.json\", \"name\": \"$SERVICE_NAME\"}"
-jq ". += [$new_entry]" current-docs-list.json > updated-docs-list.json
+# Check if the entry already exists in the existing docs
+existing_entry=$(jq ".[] | select(.url == \"docs/$ECS_SERVICE_NAME.json\")" current-docs-list.json)
 
-# Upload the updated docs-list.json file back to S3
-aws s3 cp "updated-docs-list.json" "s3://$DOCS_LIST_JSON"
-
-# Check if the upload was successful
-if [ $? -ne 0 ]; then
-    echo "Error: Swagger UI update - error on uploading docs list."
-    exit 1
+if [ -z "$existing_entry" ]; then
+    # Add the new entry to the docs list
+    new_entry="{\"url\": \"docs/$ECS_SERVICE_NAME.json\", \"name\": \"$ECS_SERVICE_NAME\"}"
+    jq ". += [$new_entry]" current-docs-list.json > updated-docs-list.json
+    aws s3 cp "updated-docs-list.json" "s3://$SWAGGER_BUCKET/docs-list.json"
 fi
 
 # Clean up temporary files
-rm current-docs-list.json updated-docs-list.json
+rm current-docs-list.json updated-docs-list.json old-openapi.json
 echo "Swagger UI updated successfully."

@@ -1,7 +1,14 @@
 version: 0.2
+env:
+  variables:
+    ECS_SERVICE_NAME: $ECS_SERVICE_NAME
+    BASE_URI: $BASE_URI
+    ENV:  $ENV
+    SWAGGER_BUCKET: $SWAGGER_BUCKET
+    OPENAPI_JSON_PATH: $OPENAPI_JSON_PATH
 phases:
   build:
     commands:
-      - cd swagger
-      - chmod +x apigateway-update.sh
-      - ./apigateway-update.sh dev
+      - |
+      - chmod +x swagger/apigateway-update.sh
+      - ./swagger/apigateway-update.sh
