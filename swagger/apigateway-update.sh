@@ -12,6 +12,7 @@ fi
 
 ENV="$1"
 SERVICE_NAME="administradora"
+API_ID=$(aws apigateway get-rest-apis --query 'items[?name==`LLZ-DEV`].[id]' --output text)
 BASE_URI="https://${SERVICE_NAME}.$ENV.llzgarantidora.com"
 OPENAPI_JSON_PATH="openapi.json"
 
@@ -103,7 +104,7 @@ else
   exit 1
 fi
 
-aws apigateway put-rest-api --rest-api-id "enq3zuko73" --mode overwrite --body "fileb://openapi.json" > /dev/null
+aws apigateway put-rest-api --rest-api-id "$API_ID" --mode overwrite --body "fileb://openapi.json" > /dev/null
 
 if [ $? -ne 0 ]; then
     echo "Error: Failed to update the API."
@@ -112,7 +113,7 @@ else
     echo "API updated successfully."
 fi
 
-aws apigateway create-deployment --rest-api-id "enq3zuko73" --stage-name "$ENV" > /dev/null
+aws apigateway create-deployment --rest-api-id "$API_ID" --stage-name "$ENV" > /dev/null
 
 if [ $? -ne 0 ]; then
     echo "Error: Failed to deploy the API."

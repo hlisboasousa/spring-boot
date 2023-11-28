@@ -2,15 +2,6 @@ version: 0.2
 phases:
   build:
     commands:
-      - echo Java build started on `date`...
-      - java -version
-      - mvn -version
-      - echo ...beginning packaging to jar...
-      - mvn clean package deploy
-      - echo ...Java build completed on `date`.
-
-  post_build:
-    commands:
       - cd swagger
       - chmod +x apigateway-update.sh
       - ./apigateway-update.sh dev
