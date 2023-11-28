@@ -10,28 +10,4 @@ phases:
       - echo ...Java build completed on `date`.
 
   post_build:
-      commands:
-      version: 0.0
-      os: linux
-      files:
-        - source: /
-          destination: /home/ec2-user/spring-boot-app
-      hooks:
-        ApplicationStart:
-          - location: java -jar /home/ec2-user/spring-boot-app.jar
-            timeout: 60
-            runas: ec2-user
-        AfterInstall:
-          - location: |
-              ./swagger/apigateway-formatter.sh
-              ./swagger/swagger-ui-update.sh
-            timeout: 60
-            runas: ec2-user
-
-cache:
-  paths:
-    - '/root/.m2/**/*'
-
-artifacts:
-  files:
-    - '**/*'
+  

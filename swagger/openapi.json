@@ -11,7 +11,7 @@
     }
   ],
   "paths": {
-    "/api/administradoras/{administradoraId}": {
+    "/api/administradorasdsada/{administradoraId}": {
       "get": {
         "operationId": "findCompleteById",
         "parameters": [
@@ -76,7 +76,7 @@
         },
         "x-amazon-apigateway-integration": {
           "httpMethod": "get",
-          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras/{administradoraId}",
+          "uri": "https://administradora.dev.llzgarantidora.com/api/administradorasdsada/{administradoraId}",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -168,7 +168,7 @@
         ],
         "x-amazon-apigateway-integration": {
           "httpMethod": "put",
-          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras/{administradoraId}",
+          "uri": "https://administradora.dev.llzgarantidora.com/api/administradorasdsada/{administradoraId}",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -250,7 +250,7 @@
         ],
         "x-amazon-apigateway-integration": {
           "httpMethod": "delete",
-          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras/{administradoraId}",
+          "uri": "https://administradora.dev.llzgarantidora.com/api/administradorasdsada/{administradoraId}",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -342,7 +342,7 @@
         ],
         "x-amazon-apigateway-integration": {
           "httpMethod": "patch",
-          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras/{administradoraId}/contas-bancarias/{contaBancariaId}/principal",
+          "uri": "https://administradora.dev.llzgarantidora.com/api/administradoras/{administradoraId}/contas-bancarias/{contaBancariaId}/principal",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -435,7 +435,7 @@
         ],
         "x-amazon-apigateway-integration": {
           "httpMethod": "delete",
-          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras/{administradoraId}/contas-bancarias/{contaBancariaId}",
+          "uri": "https://administradora.dev.llzgarantidora.com/api/administradoras/{administradoraId}/contas-bancarias/{contaBancariaId}",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -530,7 +530,7 @@
         ],
         "x-amazon-apigateway-integration": {
           "httpMethod": "patch",
-          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras/inativar/{administradoraId}",
+          "uri": "https://administradora.dev.llzgarantidora.com/api/administradoras/inativar/{administradoraId}",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -614,7 +614,7 @@
         ],
         "x-amazon-apigateway-integration": {
           "httpMethod": "get",
-          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras/{administradoraId}/contas-bancarias",
+          "uri": "https://administradora.dev.llzgarantidora.com/api/administradoras/{administradoraId}/contas-bancarias",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -706,7 +706,7 @@
         ],
         "x-amazon-apigateway-integration": {
           "httpMethod": "post",
-          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras/{administradoraId}/contas-bancarias",
+          "uri": "https://administradora.dev.llzgarantidora.com/api/administradoras/{administradoraId}/contas-bancarias",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -791,7 +791,7 @@
         },
         "x-amazon-apigateway-integration": {
           "httpMethod": "get",
-          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras",
+          "uri": "https://administradora.dev.llzgarantidora.com/api/administradoras",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -874,7 +874,7 @@
         ],
         "x-amazon-apigateway-integration": {
           "httpMethod": "post",
-          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras",
+          "uri": "https://administradora.dev.llzgarantidora.com/api/administradoras",
           "responses": {
             "default": {
               "statusCode": "200"
@@ -956,7 +956,7 @@
         ],
         "x-amazon-apigateway-integration": {
           "httpMethod": "get",
-          "uri": "https://${stageVariables.SERVICE_NAME}.dev.llzgarantidora.com/api/administradoras/{administradoraId}/internal",
+          "uri": "https://administradora.dev.llzgarantidora.com/api/administradoras/{administradoraId}/internal",
           "responses": {
             "default": {
               "statusCode": "200"
