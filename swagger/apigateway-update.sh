@@ -124,6 +124,9 @@ else
     echo "API updated successfully."
 fi
 
+# Clean up temporary files
+rm old-openapi.json
+
 # Deploy API Gateway
 aws apigateway create-deployment --rest-api-id "$API_ID" --stage-name "$ENV" > /dev/null
 if [ $? -ne 0 ]; then
@@ -134,29 +137,10 @@ else
 fi
 
 # Update Swagger-UI on S3
-aws s3 cp "$OPENAPI_JSON_PATH" "s3://$SWAGGER_BUCKET/docs/$ECS_SERVICE_NAME.json"
+aws s3 cp "$OPENAPI_JSON_PATH" "s3://$SWAGGER_BUCKET/docs/openapi.json"
 if [ $? -ne 0 ]; then
     echo "Error: Swagger UI update - uploading OpenAPI file."
     exit 1
 fi
 
-# Download the current docs-list.json file from S3
-aws s3 cp "s3://$SWAGGER_BUCKET/docs-list.json" "current-docs-list.json"
-if [ $? -ne 0 ]; then
-    echo "Error: Swagger UI update - downloading current docs list."
-    exit 1
-fi
-
-# Check if the entry already exists in the existing docs
-existing_entry=$(jq ".[] | select(.url == \"docs/$ECS_SERVICE_NAME.json\")" current-docs-list.json)
-
-if [ -z "$existing_entry" ]; then
-    # Add the new entry to the docs list
-    new_entry="{\"url\": \"docs/$ECS_SERVICE_NAME.json\", \"name\": \"$ECS_SERVICE_NAME\"}"
-    jq ". += [$new_entry]" current-docs-list.json > updated-docs-list.json
-    aws s3 cp "updated-docs-list.json" "s3://$SWAGGER_BUCKET/docs-list.json"
-fi
-
-# Clean up temporary files
-rm current-docs-list.json updated-docs-list.json old-openapi.json
 echo "Swagger UI updated successfully."
