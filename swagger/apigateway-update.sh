@@ -110,7 +110,7 @@ jq --argjson new "$openapi_data" --argjson old "$(cat old-openapi.json)" '
     if ($key | startswith("$BASE_PATH")) then
       .[$key] = $newPaths[$key]
     else
-      .
+      .[$key] = ($newPaths[$key])
     end
   ))
 ' old-openapi.json > $OPENAPI_JSON_PATH

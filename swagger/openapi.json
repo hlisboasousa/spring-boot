@@ -1,32 +1,33 @@
 {
     "openapi": "3.0.1",
     "info": {
-        "title": "LLZ Garantidora - Condomínio",
-        "description": "API Rest da aplicação LLZ Operation"
+        "title": "LLZ Garantidora - condominio",
+        "description": "API Rest da aplicação LLZ Operation",
+        "version": "1.0.0"
     },
     "servers": [
         {
-            "url": "https://condominio.uat.llzgarantidora.com",
+            "url": "https://condominio.dev.llzgarantidora.com",
             "description": "Generated server url"
         }
     ],
     "paths": {
-        "/api/condominios/{id}": {
+        "/api/condominios/{condominioId}": {
             "get": {
                 "tags": [
-                    "Condominios"
+                    "condominios"
                 ],
-                "summary": "Obter condomínio por ID",
-                "description": "Serviço responsável por realizar consulta de condomínio por ID",
+                "summary": "Obter condominio por ID",
+                "description": "Serviço responsável por realizar consulta de condominio por ID",
                 "operationId": "findCompleteById",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "condominioId",
                         "in": "path",
-                        "description": "ID do Condomínio",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "integer",
+                            "format": "int64"
                         }
                     }
                 ],
@@ -34,9 +35,9 @@
                     "200": {
                         "description": "OK",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultCondominioDetalheResponse"
+                                    "$ref": "#/components/schemas/ResponseDefaultcondominioDetalheResponse"
                                 }
                             }
                         }
@@ -44,7 +45,7 @@
                     "400": {
                         "description": "Bad Request",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ResponseDefault"
                                 }
@@ -78,19 +79,19 @@
             },
             "put": {
                 "tags": [
-                    "Condominios"
+                    "condominios"
                 ],
-                "summary": "Atualizar condomínio",
-                "description": "Serviço responsável por realizar atualização de condomínio",
+                "summary": "Atualizar condominio",
+                "description": "Serviço responsável por realizar atualização de condominio",
                 "operationId": "update",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "condominioId",
                         "in": "path",
-                        "description": "ID do Condomínio",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "integer",
+                            "format": "int64"
                         }
                     }
                 ],
@@ -98,7 +99,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/CondominioRequest"
+                                "$ref": "#/components/schemas/condominioRequest"
                             }
                         }
                     },
@@ -108,9 +109,9 @@
                     "200": {
                         "description": "OK",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultCondominioResponse"
+                                    "$ref": "#/components/schemas/ResponseDefaultcondominioResponse"
                                 }
                             }
                         }
@@ -118,7 +119,7 @@
                     "400": {
                         "description": "Bad Request",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ResponseDefault"
                                 }
@@ -152,19 +153,19 @@
             },
             "delete": {
                 "tags": [
-                    "Condominios"
+                    "condominios"
                 ],
-                "summary": "Deleção lógica de condomínio",
-                "description": "Serviço responsável por realizar deleção lógica de condomínio por ID",
+                "summary": "Deleção lógica de condominio",
+                "description": "Serviço responsável por realizar deleção lógica de condominio por ID",
                 "operationId": "delete",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "condominioId",
                         "in": "path",
-                        "description": "ID do Condomínio",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "integer",
+                            "format": "int64"
                         }
                     }
                 ],
@@ -172,7 +173,7 @@
                     "200": {
                         "description": "OK",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ResponseDefaultVoid"
                                 }
@@ -182,135 +183,7 @@
                     "400": {
                         "description": "Bad Request",
                         "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefault"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {}
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {}
-                    },
-                    "502": {
-                        "description": "Bad Gateway"
-                    },
-                    "503": {
-                        "description": "Service Unavailable"
-                    },
-                    "504": {
-                        "description": "Gateway Timeout"
-                    }
-                }
-            }
-        },
-        "/api/condominios/associacoes": {
-            "put": {
-                "tags": [
-                    "Condominios"
-                ],
-                "summary": "Atualizar associação de condominio",
-                "description": "Serviço responsável por atualizar associação de condomínio e administradora",
-                "operationId": "update_1",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/AssociaAdministradoraRequest"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultVoid"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefault"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {}
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {}
-                    },
-                    "502": {
-                        "description": "Bad Gateway"
-                    },
-                    "503": {
-                        "description": "Service Unavailable"
-                    },
-                    "504": {
-                        "description": "Gateway Timeout"
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Condominios"
-                ],
-                "summary": "Criar associação de condominio",
-                "description": "Serviço responsável por criar nova associação de condomínio e administradora",
-                "operationId": "save_2",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/AssociaAdministradoraRequest"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "201": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultVoid"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ResponseDefault"
                                 }
@@ -346,10 +219,10 @@
         "/api/condominios": {
             "get": {
                 "tags": [
-                    "Condominios"
+                    "condominios"
                 ],
-                "summary": "Listar condomínios",
-                "description": "Serviço responsável por listar os condomínios",
+                "summary": "Listar condominios",
+                "description": "Serviço responsável por listar as condominios",
                 "operationId": "findByCondition",
                 "parameters": [
                     {
@@ -357,11 +230,11 @@
                         "in": "query",
                         "required": false,
                         "schema": {
-                            "$ref": "#/components/schemas/CondominioFiltros"
+                            "$ref": "#/components/schemas/condominioFiltros"
                         }
                     },
                     {
-                        "name": "Paginação",
+                        "name": "Paginacao",
                         "in": "query",
                         "required": false,
                         "schema": {
@@ -373,9 +246,9 @@
                     "200": {
                         "description": "OK",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultPageResponseCondominioConsultaResponse"
+                                    "$ref": "#/components/schemas/ResponseDefaultPageResponsecondominioConsultaResponse"
                                 }
                             }
                         }
@@ -383,7 +256,7 @@
                     "400": {
                         "description": "Bad Request",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ResponseDefault"
                                 }
@@ -417,16 +290,16 @@
             },
             "post": {
                 "tags": [
-                    "Condominios"
+                    "condominios"
                 ],
-                "summary": "Criar condomínio",
-                "description": "Serviço responsável por criar novo condomínio",
+                "summary": "Criar condominio",
+                "description": "Serviço responsável por criar nova condominio",
                 "operationId": "save",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/CondominioRequest"
+                                "$ref": "#/components/schemas/condominioRequest"
                             }
                         }
                     },
@@ -436,9 +309,9 @@
                     "201": {
                         "description": "OK",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultCondominioResponse"
+                                    "$ref": "#/components/schemas/ResponseDefaultcondominioResponse"
                                 }
                             }
                         }
@@ -446,7 +319,7 @@
                     "400": {
                         "description": "Bad Request",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ResponseDefault"
                                 }
@@ -479,107 +352,32 @@
                 }
             }
         },
-        "/api/condominios/{condominioId}/descontos-pontualidade": {
-            "post": {
+        "/api/condominios/{condominioId}/contas-bancarias": {
+            "get": {
                 "tags": [
-                    "Desconto Pontualidade"
+                    "Conta Bancária"
                 ],
-                "summary": "Criar desconto de pontualidade",
-                "description": "Serviço responsável por criar novo desconto de pontualidade",
-                "operationId": "save_1",
+                "summary": "Listar contas bancárias",
+                "description": "Serviço responsável por listar as contas bancárias da condominio",
+                "operationId": "findAllBycondominioId",
                 "parameters": [
                     {
                         "name": "condominioId",
                         "in": "path",
-                        "description": "ID do Condomínio",
+                        "description": "ID da condominio",
                         "required": true,
                         "schema": {
                             "type": "integer"
                         }
                     }
                 ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/DescontoPontualidadeRequest"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "201": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultDescontoPontualidadeResponse"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefault"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {}
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {}
-                    },
-                    "502": {
-                        "description": "Bad Gateway"
-                    },
-                    "503": {
-                        "description": "Service Unavailable"
-                    },
-                    "504": {
-                        "description": "Gateway Timeout"
-                    }
-                }
-            }
-        },
-        "/api/condominios/associacoes/valida-associacao": {
-            "post": {
-                "tags": [
-                    "Condominios"
-                ],
-                "summary": "Verificar associação de condominio",
-                "description": "Serviço responsável por verificar se os condomínios já estão associados a outra administradora, se encontrar, uma exception será lançada",
-                "operationId": "validaAssociacao",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/AssociaAdministradoraRequest"
-                            }
-                        }
-                    },
-                    "required": true
-                },
                 "responses": {
                     "200": {
                         "description": "OK",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultVoid"
+                                    "$ref": "#/components/schemas/ResponseDefaultListcondominioContaBancariaConsultaResponse"
                                 }
                             }
                         }
@@ -587,7 +385,7 @@
                     "400": {
                         "description": "Bad Request",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ResponseDefault"
                                 }
@@ -618,97 +416,19 @@
                         "description": "Gateway Timeout"
                     }
                 }
-            }
-        },
-        "/api/Condominios/{condominio}/conta-administradora": {
-            "post": {
-                "tags": [
-                    "Conta Bancária da administradora"
-                ],
-                "summary": "Vincular conta bancária administradora",
-                "description": "Serviço responsável por vincular conta bancária da administradora",
-                "operationId": "save_3",
-                "parameters": [
-                    {
-                        "name": "condominio",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/AdministradoraContaBancariaRequest"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "201": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultCondominioContaBancariaAdministradoraResponse"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefault"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {}
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {}
-                    },
-                    "502": {
-                        "description": "Bad Gateway"
-                    },
-                    "503": {
-                        "description": "Service Unavailable"
-                    },
-                    "504": {
-                        "description": "Gateway Timeout"
-                    }
-                }
-            }
-        },
-        "/api/Condominios/{Condominio}/contas-bancarias": {
+            },
             "post": {
                 "tags": [
                     "Conta Bancária"
                 ],
                 "summary": "Criar conta bancária",
                 "description": "Serviço responsável por criar nova conta bancária",
-                "operationId": "save_4",
+                "operationId": "save_1",
                 "parameters": [
                     {
-                        "name": "Condominio",
+                        "name": "condominioId",
                         "in": "path",
-                        "description": "ID da Condominio",
+                        "description": "ID da condominio",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -719,7 +439,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/CondominioContaBancariaRequest"
+                                "$ref": "#/components/schemas/condominioContaBancariaRequest"
                             }
                         }
                     },
@@ -729,9 +449,9 @@
                     "201": {
                         "description": "OK",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultCondominioContaBancariaResponse"
+                                    "$ref": "#/components/schemas/ResponseDefaultcondominioContaBancariaResponse"
                                 }
                             }
                         }
@@ -739,7 +459,7 @@
                     "400": {
                         "description": "Bad Request",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ResponseDefault"
                                 }
@@ -772,83 +492,7 @@
                 }
             }
         },
-        "/api/condominios/inativar/{id}": {
-            "patch": {
-                "tags": [
-                    "Condominios"
-                ],
-                "summary": "Inativar condomínio",
-                "description": "Serviço responsável por realizar inativação de condomínio por ID",
-                "operationId": "inativar",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID do Condomínio",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CondominioInativarRequest"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultVoid"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefault"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {}
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {}
-                    },
-                    "502": {
-                        "description": "Bad Gateway"
-                    },
-                    "503": {
-                        "description": "Service Unavailable"
-                    },
-                    "504": {
-                        "description": "Gateway Timeout"
-                    }
-                }
-            }
-        },
-        "/api/Condominios/{Condominio}/contas-bancarias/{id}/principal": {
+        "/api/condominios/{condominioId}/contas-bancarias/{contaBancariaId}/principal": {
             "patch": {
                 "tags": [
                     "Conta Bancária"
@@ -858,21 +502,21 @@
                 "operationId": "alteraContaBancariaPrincipal",
                 "parameters": [
                     {
-                        "name": "Condominio",
+                        "name": "condominioId",
                         "in": "path",
-                        "description": "ID do Condominio",
+                        "description": "ID da condominio",
                         "required": true,
                         "schema": {
                             "type": "integer"
                         }
                     },
                     {
-                        "name": "id",
+                        "name": "contaBancariaId",
                         "in": "path",
-                        "description": "ID da Conta Bancária",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "integer",
+                            "format": "int64"
                         }
                     }
                 ],
@@ -880,7 +524,7 @@
                     "200": {
                         "description": "OK",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ResponseDefaultVoid"
                                 }
@@ -890,7 +534,7 @@
                     "400": {
                         "description": "Bad Request",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ResponseDefault"
                                 }
@@ -923,159 +567,18 @@
                 }
             }
         },
-        "/api/condominios/{condominioId}/descontos-pontualidade/{descontoId}": {
-            "get": {
+        "/api/condominios/inativar/{condominioId}": {
+            "patch": {
                 "tags": [
-                    "Desconto Pontualidade"
+                    "condominios"
                 ],
-                "summary": "Obter desconto de pontualidade por ID",
-                "description": "Serviço responsável por realizar consulta de desconto de pontualidade por ID",
-                "operationId": "findCompleteById_1",
+                "summary": "Inativar condominio",
+                "description": "Serviço responsável por realizar inativação de condominio por ID",
+                "operationId": "inativar",
                 "parameters": [
                     {
                         "name": "condominioId",
                         "in": "path",
-                        "description": "ID do Condomínio",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "name": "descontoId",
-                        "in": "path",
-                        "description": "ID do Desconto de Pontualidade",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultDescontoPontualidadeResponse"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefault"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {}
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {}
-                    },
-                    "502": {
-                        "description": "Bad Gateway"
-                    },
-                    "503": {
-                        "description": "Service Unavailable"
-                    },
-                    "504": {
-                        "description": "Gateway Timeout"
-                    }
-                }
-            }
-        },
-        "/api/condominios/{condominioId}/descontos-pontualidade/ultimo-padrao": {
-            "get": {
-                "tags": [
-                    "Desconto Pontualidade"
-                ],
-                "summary": "Obter desconto de pontualidade padrão por Condomínio ID",
-                "description": "Serviço responsável por realizar consulta de desconto de pontualidade padrão por condomínio ID",
-                "operationId": "findUltimoPadraoByCondominioId",
-                "parameters": [
-                    {
-                        "name": "condominioId",
-                        "in": "path",
-                        "description": "ID do Condomínio",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultDescontoPontualidadePadraoResponse"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefault"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {}
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {}
-                    },
-                    "502": {
-                        "description": "Bad Gateway"
-                    },
-                    "503": {
-                        "description": "Service Unavailable"
-                    },
-                    "504": {
-                        "description": "Gateway Timeout"
-                    }
-                }
-            }
-        },
-        "/api/condominios/associacoes/administradora/{administradoraId}": {
-            "get": {
-                "tags": [
-                    "Condominios"
-                ],
-                "summary": "Consulta condomínios associados",
-                "description": "Serviço responsável por retornar uma lista de condomínios associados à uma administradora",
-                "operationId": "findAllAssociadoAdministradora",
-                "parameters": [
-                    {
-                        "name": "administradoraId",
-                        "in": "path",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -1083,86 +586,21 @@
                         }
                     }
                 ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/condominioInativarRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
                 "responses": {
                     "200": {
                         "description": "OK",
                         "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultListCondominioAssociadoResponse"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "*/*": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefault"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {}
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {}
-                    },
-                    "502": {
-                        "description": "Bad Gateway"
-                    },
-                    "503": {
-                        "description": "Service Unavailable"
-                    },
-                    "504": {
-                        "description": "Gateway Timeout"
-                    }
-                }
-            }
-        },
-        "/api/Condominios/{condominio}/conta-administradora/{idContaAdministradora}": {
-            "delete": {
-                "tags": [
-                    "Conta Bancária da administradora"
-                ],
-                "summary": "Desvincular conta bancária da administradora",
-                "description": "Serviço responsável por desvincular conta bancária da administradora",
-                "operationId": "delete_1",
-                "parameters": [
-                    {
-                        "name": "condominio",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    },
-                    {
-                        "name": "idContaAdministradora",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ResponseDefaultVoid"
                                 }
@@ -1172,7 +610,7 @@
                     "400": {
                         "description": "Bad Request",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ResponseDefault"
                                 }
@@ -1205,31 +643,97 @@
                 }
             }
         },
-        "/api/Condominios/{Condominio}/contas-bancarias/{id}": {
+        "/api/condominios/{condominioId}/internal": {
+            "get": {
+                "tags": [
+                    "condominios"
+                ],
+                "summary": "Obter condominio por ID",
+                "description": "Serviço responsável por realizar consulta de condominio por ID e não retonar dados de entidades relacionadas",
+                "operationId": "findInternalById",
+                "parameters": [
+                    {
+                        "name": "condominioId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseDefaultcondominioInternalResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseDefault"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {}
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {}
+                    },
+                    "502": {
+                        "description": "Bad Gateway"
+                    },
+                    "503": {
+                        "description": "Service Unavailable"
+                    },
+                    "504": {
+                        "description": "Gateway Timeout"
+                    }
+                }
+            }
+        },
+        "/api/condominios/{condominioId}/contas-bancarias/{contaBancariaId}": {
             "delete": {
                 "tags": [
                     "Conta Bancária"
                 ],
                 "summary": "Deleção lógica de conta bancária",
                 "description": "Serviço responsável por realizar deleção lógica de conta bancária por ID",
-                "operationId": "delete_2",
+                "operationId": "delete_1",
                 "parameters": [
                     {
-                        "name": "Condominio",
+                        "name": "condominioId",
                         "in": "path",
-                        "description": "ID da Condominio",
+                        "description": "ID da condominio",
                         "required": true,
                         "schema": {
                             "type": "integer"
                         }
                     },
                     {
-                        "name": "id",
+                        "name": "contaBancariaId",
                         "in": "path",
-                        "description": "ID da Conta Bancária",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "integer",
+                            "format": "int64"
                         }
                     }
                 ],
@@ -1237,7 +741,7 @@
                     "200": {
                         "description": "OK",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ResponseDefaultVoid"
                                 }
@@ -1247,7 +751,7 @@
                     "400": {
                         "description": "Bad Request",
                         "content": {
-                            "*/*": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/ResponseDefault"
                                 }
@@ -1300,165 +804,25 @@
                     }
                 }
             },
-            "AdministradoraContaBancariaRequest": {
-                "type": "object",
-                "properties": {
-                    "idContaAdministradora": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                }
-            },
-            "AdministradoraRequest": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                }
-            },
-            "AgrupamentoMultaRequest": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                }
-            },
-            "BancoRequest": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                }
-            },
-            "CondominioContaBancariaRequest": {
+            "condominioRequest": {
                 "required": [
-                    "agencia",
-                    "banco",
-                    "cnpj",
-                    "conta",
-                    "principal",
-                    "tipo",
-                    "titularConta"
+                    "cnpj"
                 ],
                 "type": "object",
                 "properties": {
-                    "cnpj": {
-                        "type": "string"
+                    "matriz": {
+                        "$ref": "#/components/schemas/MatrizRequest"
                     },
-                    "titularConta": {
-                        "type": "string"
-                    },
-                    "banco": {
-                        "$ref": "#/components/schemas/BancoRequest"
-                    },
-                    "tipo": {
-                        "type": "string",
-                        "enum": [
-                            "CONTA_CORRENTE",
-                            "CONTA_POUPANCA"
-                        ]
-                    },
-                    "agencia": {
-                        "type": "string"
-                    },
-                    "conta": {
-                        "type": "string"
-                    },
-                    "operacao": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "principal": {
-                        "type": "boolean"
-                    }
-                }
-            },
-            "CondominioContratoRequest": {
-                "type": "object",
-                "properties": {
-                    "seguro": {
-                        "type": "boolean"
-                    },
-                    "agrupamentoMulta": {
-                        "$ref": "#/components/schemas/AgrupamentoMultaRequest"
-                    },
-                    "agrupamentoMultaBase": {
-                        "$ref": "#/components/schemas/AgrupamentoMultaRequest"
-                    },
-                    "repasseParaAdministradora": {
-                        "$ref": "#/components/schemas/RepasseAdministradoraRequest"
-                    },
-                    "repasseSemGarantia": {
-                        "$ref": "#/components/schemas/RepasseSemGarantiaRequest"
+                    "regional": {
+                        "$ref": "#/components/schemas/RegionalRequest"
                     },
                     "dataInicioContrato": {
                         "type": "string",
                         "format": "date"
                     },
-                    "dataTerminoContrato": {
+                    "dataFimContrato": {
                         "type": "string",
                         "format": "date"
-                    },
-                    "dataVencimentoPrevisto": {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "indCorrecaoMonetaria": {
-                        "type": "string",
-                        "enum": [
-                            "INPC_IBGE",
-                            "IPCA_IBGE",
-                            "TR",
-                            "IGPM_FGV",
-                            "ISENCAO"
-                        ]
-                    },
-                    "instrucaoBoleto": {
-                        "type": "string"
-                    },
-                    "taxaServico": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "tarifaBancaria": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "tarifaBancaria2": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perCorrecaoMonetaria": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "motoboy": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "impressao": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "descPontualidade": {
-                        "type": "boolean"
-                    }
-                }
-            },
-            "CondominioRequest": {
-                "type": "object",
-                "properties": {
-                    "administradora": {
-                        "$ref": "#/components/schemas/AdministradoraRequest"
-                    },
-                    "regional": {
-                        "$ref": "#/components/schemas/RegionalRequest"
                     },
                     "razaoSocial": {
                         "type": "string"
@@ -1472,17 +836,19 @@
                     "email": {
                         "type": "string"
                     },
-                    "inscricaoMunicipal": {
+                    "parceira": {
+                        "type": "boolean"
+                    },
+                    "observacao": {
                         "type": "string"
                     },
-                    "inscricaoEstadual": {
-                        "type": "string"
-                    },
-                    "nomeResponsavel": {
-                        "type": "string"
-                    },
-                    "cargoResponsavel": {
-                        "type": "string"
+                    "tipoDadoBancario": {
+                        "type": "string",
+                        "enum": [
+                            "BOLETO",
+                            "TRANS_BANCARIA_condominio",
+                            "TRANS_BANCARIA_CONDOMINIO"
+                        ]
                     },
                     "endereco": {
                         "$ref": "#/components/schemas/EnderecoRequest"
@@ -1493,31 +859,32 @@
                             "$ref": "#/components/schemas/TelefoneRequest"
                         }
                     },
+                    "responsaveis": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/PessoaRequest"
+                        }
+                    },
+                    "condominios": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CondominioAssociadoRequest"
+                        }
+                    },
                     "documentos": {
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/DocumentoRequest"
                         }
-                    },
-                    "tipoDadoBancario": {
-                        "type": "string",
-                        "enum": [
-                            "BOLETO",
-                            "TRANS_BANCARIA_ADMINISTRADORA",
-                            "TRANS_BANCARIA_CONDOMINIO"
-                        ]
-                    },
-                    "contasBancarias": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/CondominioContaBancariaRequest"
-                        }
-                    },
-                    "administradoraContaBancaria": {
-                        "$ref": "#/components/schemas/AdministradoraContaBancariaRequest"
-                    },
-                    "dadosContratuais": {
-                        "$ref": "#/components/schemas/CondominioContratoRequest"
+                    }
+                }
+            },
+            "CondominioAssociadoRequest": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
                     }
                 }
             },
@@ -1592,9 +959,55 @@
                     "id": {
                         "type": "integer",
                         "format": "int64"
+                    }
+                }
+            },
+            "MatrizRequest": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                }
+            },
+            "PessoaRequest": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
                     },
                     "nome": {
                         "type": "string"
+                    },
+                    "cpf": {
+                        "type": "string"
+                    },
+                    "dtNascimento": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "telefones": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TelefoneRequest"
+                        }
+                    },
+                    "tipoPessoa": {
+                        "type": "string",
+                        "enum": [
+                            "RES_ADM",
+                            "RES_COM",
+                            "RES_CAP",
+                            "SIN",
+                            "CON",
+                            "PRO",
+                            "INQ"
+                        ]
                     }
                 }
             },
@@ -1604,108 +1017,6 @@
                     "id": {
                         "type": "integer",
                         "format": "int64"
-                    }
-                }
-            },
-            "RepasseAdministradoraRequest": {
-                "type": "object",
-                "properties": {
-                    "txReceitaGarantida": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "txRreceitaNaoGarantida": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "txDeInadimplencia": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perJuros": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perMulta": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perEncargos": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perHonorarios": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perCorrecao": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perTarifa1ViaBoleto": {
-                        "type": "number",
-                        "format": "float"
-                    }
-                }
-            },
-            "RepasseSemGarantiaRequest": {
-                "type": "object",
-                "properties": {
-                    "perCondominio": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "percGarantidora": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perPrincCond": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perPrincGarant": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perMultaCond": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perMultaGarant": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perJurosCond": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perJurosGarant": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perCorMonetCond": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perCorMonetGarant": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perEncargCond": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perEncargGarant": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perHonorCond": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perHonorGarant": {
-                        "type": "number",
-                        "format": "float"
                     }
                 }
             },
@@ -1753,130 +1064,26 @@
                     }
                 }
             },
-            "AdministradoraResponse": {
+            "condominioResponse": {
                 "type": "object",
                 "properties": {
                     "id": {
                         "type": "integer",
                         "format": "int64"
                     },
-                    "razaoSocial": {
-                        "type": "string"
+                    "matriz": {
+                        "$ref": "#/components/schemas/MatrizResponse"
                     },
-                    "cnpj": {
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "parceira": {
-                        "type": "boolean"
-                    }
-                }
-            },
-            "AgrupamentoMultaResponse": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                }
-            },
-            "CondominioContratoResponse": {
-                "type": "object",
-                "properties": {
-                    "seguro": {
-                        "type": "boolean"
-                    },
-                    "idTipoDeCobrancaGrupoPadrao": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "idTipoDeCobrancaGrupo": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "idRepasseSemGarantiaGrupo": {
-                        "type": "integer",
-                        "format": "int32"
+                    "regional": {
+                        "$ref": "#/components/schemas/RegionalResponse"
                     },
                     "dataInicioContrato": {
                         "type": "string",
                         "format": "date"
                     },
-                    "dataTerminoContrato": {
+                    "dataFimContrato": {
                         "type": "string",
                         "format": "date"
-                    },
-                    "dataVencimentoPrevisto": {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "indCorrecaoMonetaria": {
-                        "type": "string",
-                        "enum": [
-                            "INPC_IBGE",
-                            "IPCA_IBGE",
-                            "TR",
-                            "IGPM_FGV",
-                            "ISENCAO"
-                        ]
-                    },
-                    "instrucaoBoleto": {
-                        "type": "string"
-                    },
-                    "taxaServico": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "tarifaBancaria": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "tarifaBancaria2": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perCorrecaoMonetaria": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "motoboy": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "impressao": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "descPontualidade": {
-                        "type": "boolean"
-                    },
-                    "agrupamentoMulta": {
-                        "$ref": "#/components/schemas/AgrupamentoMultaResponse"
-                    },
-                    "agrupamentoMultaBase": {
-                        "$ref": "#/components/schemas/AgrupamentoMultaResponse"
-                    },
-                    "repasseParaAdministradora": {
-                        "$ref": "#/components/schemas/RepasseAdministradoraResponse"
-                    },
-                    "repasseSemGarantia": {
-                        "$ref": "#/components/schemas/RepasseSemGarantiaResponse"
-                    }
-                }
-            },
-            "CondominioResponse": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "regionalId": {
-                        "type": "integer",
-                        "format": "int64"
                     },
                     "razaoSocial": {
                         "type": "string"
@@ -1890,10 +1097,21 @@
                     "email": {
                         "type": "string"
                     },
-                    "inscricaoMunicipal": {
+                    "parceira": {
+                        "type": "boolean"
+                    },
+                    "observacao": {
                         "type": "string"
                     },
-                    "inscricaoEstadual": {
+                    "tipoDadoBancario": {
+                        "type": "string",
+                        "enum": [
+                            "BOLETO",
+                            "TRANS_BANCARIA_condominio",
+                            "TRANS_BANCARIA_CONDOMINIO"
+                        ]
+                    },
+                    "motivoInativacao": {
                         "type": "string"
                     },
                     "situacao": {
@@ -1915,71 +1133,261 @@
                             "LIQUIDADO",
                             "VENCIDO"
                         ]
-                    },
-                    "sindico": {
-                        "$ref": "#/components/schemas/SindicoResponse"
-                    },
-                    "endereco": {
-                        "$ref": "#/components/schemas/EnderecoResponse"
-                    },
-                    "telefones": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/TelefoneResponse"
-                        }
-                    },
-                    "documentos": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/DocumentoResponse"
-                        }
-                    },
-                    "administradora": {
-                        "$ref": "#/components/schemas/AdministradoraResponse"
-                    },
-                    "dadosContratuais": {
-                        "$ref": "#/components/schemas/CondominioContratoResponse"
                     }
                 }
             },
-            "DocumentoResponse": {
+            "MatrizResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                }
+            },
+            "RegionalResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                }
+            },
+            "ResponseDefaultcondominioResponse": {
+                "type": "object",
+                "properties": {
+                    "response": {
+                        "$ref": "#/components/schemas/condominioResponse"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/StatusDefaultResponse"
+                    }
+                }
+            },
+            "condominioContaBancariaRequest": {
+                "required": [
+                    "agencia",
+                    "banco",
+                    "cnpj",
+                    "conta",
+                    "principal",
+                    "tipo",
+                    "titularConta"
+                ],
+                "type": "object",
+                "properties": {
+                    "cnpj": {
+                        "type": "string"
+                    },
+                    "titularConta": {
+                        "type": "string"
+                    },
+                    "banco": {
+                        "$ref": "#/components/schemas/BancoRequest"
+                    },
+                    "tipo": {
+                        "type": "string",
+                        "enum": [
+                            "CONTA_CORRENTE",
+                            "CONTA_POUPANCA"
+                        ]
+                    },
+                    "agencia": {
+                        "type": "string"
+                    },
+                    "conta": {
+                        "type": "string"
+                    },
+                    "operacao": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "principal": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "BancoRequest": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                }
+            },
+            "condominioContaBancariaResponse": {
                 "type": "object",
                 "properties": {
                     "id": {
                         "type": "integer",
                         "format": "int64"
                     },
+                    "cnpj": {
+                        "type": "string"
+                    },
+                    "titularConta": {
+                        "type": "string"
+                    },
+                    "banco": {
+                        "$ref": "#/components/schemas/BancoResponse"
+                    },
                     "tipo": {
                         "type": "string",
                         "enum": [
-                            "CONTRATO_SOCIAL",
-                            "ULTIMA_ALTERACAO_CONTRATUAL",
-                            "COMPROVANTE_ENDERECO_EMPESA",
-                            "TERMO_PARCERIA",
-                            "DOCUMENTO_FOTO_RESPONSAVEL_EMPRESA",
-                            "CARTAO_CNPJ",
-                            "DADOS_BANCARIOS",
-                            "CNPJ_CONDOMINIO",
-                            "CONVENCAO",
-                            "ATA",
-                            "RG_CNH_SINDICO",
-                            "COMPROVANTE_ENDERECO_SINDICO",
-                            "CADASTRO_UNIDADES"
+                            "CONTA_CORRENTE",
+                            "CONTA_POUPANCA"
                         ]
+                    },
+                    "agencia": {
+                        "type": "string"
+                    },
+                    "conta": {
+                        "type": "string"
+                    },
+                    "operacao": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "principal": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "BancoResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "codBacen": {
+                        "type": "string"
                     },
                     "nome": {
                         "type": "string"
+                    }
+                }
+            },
+            "ResponseDefaultcondominioContaBancariaResponse": {
+                "type": "object",
+                "properties": {
+                    "response": {
+                        "$ref": "#/components/schemas/condominioContaBancariaResponse"
                     },
-                    "dataValidade": {
-                        "type": "string",
-                        "format": "date"
+                    "status": {
+                        "$ref": "#/components/schemas/StatusDefaultResponse"
+                    }
+                }
+            },
+            "ResponseDefaultVoid": {
+                "type": "object",
+                "properties": {
+                    "response": {
+                        "type": "object"
                     },
-                    "dataCadastro": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "url": {
+                    "status": {
+                        "$ref": "#/components/schemas/StatusDefaultResponse"
+                    }
+                }
+            },
+            "condominioInativarRequest": {
+                "required": [
+                    "motivo"
+                ],
+                "type": "object",
+                "properties": {
+                    "motivo": {
                         "type": "string"
+                    }
+                }
+            },
+            "condominioFiltros": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "parceira": {
+                        "type": "boolean"
+                    },
+                    "situacao": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PageableRequest": {
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "size": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "orderBy": {
+                        "type": "string"
+                    },
+                    "sort": {
+                        "type": "string"
+                    }
+                }
+            },
+            "condominioConsultaResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "razaoSocial": {
+                        "type": "string"
+                    },
+                    "cnpj": {
+                        "type": "string"
+                    },
+                    "endereco": {
+                        "$ref": "#/components/schemas/EnderecoResponse"
+                    },
+                    "parceira": {
+                        "type": "boolean"
+                    },
+                    "qtdCondominios": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "totalReceitasCondominios": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "motivoInativacao": {
+                        "type": "string"
+                    },
+                    "situacao": {
+                        "type": "string",
+                        "enum": [
+                            "ATIVO",
+                            "INATIVO",
+                            "PENDENTE",
+                            "DELETADO",
+                            "NAO_LANCADO",
+                            "LANCADO",
+                            "PROCESSADO",
+                            "PROCESSADO_COM_FALHA",
+                            "EM_PROCESSAMENTO",
+                            "FALHA",
+                            "AGUARDANDO_FINALIZACAO",
+                            "AGUARDANDO_EMISSAO",
+                            "AGUARDANDO_PAGAMENTO",
+                            "LIQUIDADO",
+                            "VENCIDO"
+                        ]
                     }
                 }
             },
@@ -2035,123 +1443,211 @@
                     }
                 }
             },
-            "RepasseAdministradoraResponse": {
+            "PageResponsecondominioConsultaResponse": {
                 "type": "object",
                 "properties": {
-                    "txReceitaGarantida": {
-                        "type": "number",
-                        "format": "float"
+                    "content": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/condominioConsultaResponse"
+                        }
                     },
-                    "txRreceitaNaoGarantida": {
-                        "type": "number",
-                        "format": "float"
+                    "totalElements": {
+                        "type": "integer",
+                        "format": "int64"
                     },
-                    "txDeInadimplencia": {
-                        "type": "number",
-                        "format": "float"
+                    "totalPages": {
+                        "type": "integer",
+                        "format": "int64"
                     },
-                    "perJuros": {
-                        "type": "number",
-                        "format": "float"
+                    "page": {
+                        "type": "integer",
+                        "format": "int32"
                     },
-                    "perMulta": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perEncargos": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perHonorarios": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perCorrecao": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perTarifa1ViaBoleto": {
-                        "type": "number",
-                        "format": "float"
-                    }
-                }
-            },
-            "RepasseSemGarantiaResponse": {
-                "type": "object",
-                "properties": {
-                    "padrao": {
+                    "first": {
                         "type": "boolean"
                     },
-                    "perCondominio": {
-                        "type": "number",
-                        "format": "float"
+                    "last": {
+                        "type": "boolean"
                     },
-                    "percGarantidora": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perPrincCond": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perPrincGarant": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perMultaCond": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perMultaGarant": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perJurosCond": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perJurosGarant": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perCorMonetCond": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perCorMonetGarant": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perEncargCond": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perEncargGarant": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perHonorCond": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "perHonorGarant": {
-                        "type": "number",
-                        "format": "float"
+                    "empty": {
+                        "type": "boolean"
                     }
                 }
             },
-            "ResponseDefaultCondominioResponse": {
+            "ResponseDefaultPageResponsecondominioConsultaResponse": {
                 "type": "object",
                 "properties": {
                     "response": {
-                        "$ref": "#/components/schemas/CondominioResponse"
+                        "$ref": "#/components/schemas/PageResponsecondominioConsultaResponse"
                     },
                     "status": {
                         "$ref": "#/components/schemas/StatusDefaultResponse"
                     }
                 }
             },
-            "SindicoResponse": {
+            "condominioDetalheResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "dataInicioContrato": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "dataFimContrato": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "razaoSocial": {
+                        "type": "string"
+                    },
+                    "nomeFantasia": {
+                        "type": "string"
+                    },
+                    "cnpj": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "parceira": {
+                        "type": "boolean"
+                    },
+                    "observacao": {
+                        "type": "string"
+                    },
+                    "endereco": {
+                        "$ref": "#/components/schemas/EnderecoResponse"
+                    },
+                    "tipoDadoBancario": {
+                        "type": "string",
+                        "enum": [
+                            "BOLETO",
+                            "TRANS_BANCARIA_condominio",
+                            "TRANS_BANCARIA_CONDOMINIO"
+                        ]
+                    },
+                    "contasBancarias": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/condominioContaBancariaResponse"
+                        }
+                    },
+                    "telefones": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TelefoneResponse"
+                        }
+                    },
+                    "responsaveis": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/PessoaResponse"
+                        }
+                    },
+                    "documentos": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DocumentoResponse"
+                        }
+                    },
+                    "condominios": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CondominioAssociadoResponse"
+                        }
+                    },
+                    "motivoInativacao": {
+                        "type": "string"
+                    },
+                    "situacao": {
+                        "type": "string",
+                        "enum": [
+                            "ATIVO",
+                            "INATIVO",
+                            "PENDENTE",
+                            "DELETADO",
+                            "NAO_LANCADO",
+                            "LANCADO",
+                            "PROCESSADO",
+                            "PROCESSADO_COM_FALHA",
+                            "EM_PROCESSAMENTO",
+                            "FALHA",
+                            "AGUARDANDO_FINALIZACAO",
+                            "AGUARDANDO_EMISSAO",
+                            "AGUARDANDO_PAGAMENTO",
+                            "LIQUIDADO",
+                            "VENCIDO"
+                        ]
+                    }
+                }
+            },
+            "CondominioAssociadoResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "razaoSocial": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "telefones": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TelefoneResponse"
+                        }
+                    }
+                }
+            },
+            "DocumentoResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "tipo": {
+                        "type": "string",
+                        "enum": [
+                            "CONTRATO_SOCIAL",
+                            "ULTIMA_ALTERACAO_CONTRATUAL",
+                            "COMPROVANTE_ENDERECO_EMPESA",
+                            "TERMO_PARCERIA",
+                            "DOCUMENTO_FOTO_RESPONSAVEL_EMPRESA",
+                            "CARTAO_CNPJ",
+                            "DADOS_BANCARIOS",
+                            "CNPJ_CONDOMINIO",
+                            "CONVENCAO",
+                            "ATA",
+                            "RG_CNH_SINDICO",
+                            "COMPROVANTE_ENDERECO_SINDICO",
+                            "CADASTRO_UNIDADES"
+                        ]
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
+                    "dataValidade": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "dataCadastro": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "url": {
+                        "type": "string"
+                    }
+                }
+            },
+            "PessoaResponse": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -2161,16 +1657,35 @@
                     "nome": {
                         "type": "string"
                     },
-                    "dtInicioMandato": {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "dtFimMandato": {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "observacao": {
+                    "cpf": {
                         "type": "string"
+                    },
+                    "matricula": {
+                        "type": "string"
+                    },
+                    "dtNascimento": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "telefones": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TelefoneResponse"
+                        }
+                    }
+                }
+            },
+            "ResponseDefaultcondominioDetalheResponse": {
+                "type": "object",
+                "properties": {
+                    "response": {
+                        "$ref": "#/components/schemas/condominioDetalheResponse"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/StatusDefaultResponse"
                     }
                 }
             },
@@ -2203,338 +1718,39 @@
                     }
                 }
             },
-            "AssociaAdministradoraRequest": {
-                "type": "object",
-                "properties": {
-                    "administradoraId": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "condominios": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/AssociaCondominioRequest"
-                        }
-                    }
-                }
-            },
-            "AssociaCondominioRequest": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                }
-            },
-            "ResponseDefaultVoid": {
-                "type": "object",
-                "properties": {
-                    "response": {
-                        "type": "object"
-                    },
-                    "status": {
-                        "$ref": "#/components/schemas/StatusDefaultResponse"
-                    }
-                }
-            },
-            "DescontoPontualidadePeriodoRequest": {
-                "required": [
-                    "descontosTiposCobranca",
-                    "numPeriodo"
-                ],
+            "condominioInternalResponse": {
                 "type": "object",
                 "properties": {
                     "id": {
                         "type": "integer",
                         "format": "int64"
                     },
-                    "valPerc": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "valMonetario": {
-                        "type": "number"
-                    },
-                    "numPeriodo": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "descontosTiposCobranca": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/DescontoTipoCobrancaRequest"
-                        }
-                    }
-                }
-            },
-            "DescontoPontualidadeRequest": {
-                "required": [
-                    "descontoPontualidadePeriodos",
-                    "tipoDesconto",
-                    "tipoDias"
-                ],
-                "type": "object",
-                "properties": {
-                    "rateio": {
-                        "$ref": "#/components/schemas/RateioRequest"
-                    },
-                    "tipoDesconto": {
-                        "type": "string",
-                        "enum": [
-                            "VALOR_SOB_TAXA_UNIDADE",
-                            "VALOR_SOB_TAXA_CONDOMINIO",
-                            "VALOR_ABATIDO_UNIDADE"
-                        ]
-                    },
-                    "tipoDias": {
-                        "type": "string",
-                        "enum": [
-                            "UTEIS",
-                            "CORRIDOS"
-                        ]
-                    },
-                    "valSeparadamente": {
-                        "type": "boolean"
-                    },
-                    "cobrarSindico": {
-                        "type": "boolean"
-                    },
-                    "cobrarSubsindico": {
-                        "type": "boolean"
-                    },
-                    "contabilizarRepasse": {
-                        "type": "boolean"
-                    },
-                    "repassarCondominio": {
-                        "type": "boolean"
-                    },
-                    "dtRepassarCondominio": {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "manterPadrao": {
-                        "type": "boolean"
-                    },
-                    "descontoPontualidadePeriodos": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/DescontoPontualidadePeriodoRequest"
-                        }
-                    }
-                }
-            },
-            "DescontoTipoCobrancaRequest": {
-                "required": [
-                    "tipoCobranca"
-                ],
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "tipoCobranca": {
-                        "$ref": "#/components/schemas/TipoCobrancaRequest"
-                    }
-                }
-            },
-            "RateioRequest": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                }
-            },
-            "TipoCobrancaRequest": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                }
-            },
-            "CondominioComIdResponse": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                }
-            },
-            "DescontoPontualidadePeriodoResponse": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "valPerc": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "valMonetario": {
-                        "type": "number"
-                    },
-                    "numPeriodo": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "descontosTiposCobranca": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/DescontoTipoCobrancaResponse"
-                        }
-                    }
-                }
-            },
-            "DescontoPontualidadeResponse": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "condominio": {
-                        "$ref": "#/components/schemas/CondominioComIdResponse"
-                    },
-                    "rateio": {
-                        "$ref": "#/components/schemas/RateioResponse"
-                    },
-                    "tipoDesconto": {
-                        "type": "string",
-                        "enum": [
-                            "VALOR_SOB_TAXA_UNIDADE",
-                            "VALOR_SOB_TAXA_CONDOMINIO",
-                            "VALOR_ABATIDO_UNIDADE"
-                        ]
-                    },
-                    "tipoDias": {
-                        "type": "string",
-                        "enum": [
-                            "UTEIS",
-                            "CORRIDOS"
-                        ]
-                    },
-                    "valSeparadamente": {
-                        "type": "boolean"
-                    },
-                    "cobrarSindico": {
-                        "type": "boolean"
-                    },
-                    "cobrarSubsindico": {
-                        "type": "boolean"
-                    },
-                    "contabilizarRepasse": {
-                        "type": "boolean"
-                    },
-                    "repassarCondominio": {
-                        "type": "boolean"
-                    },
-                    "dtRepassarCondominio": {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "manterPadrao": {
-                        "type": "boolean"
-                    },
-                    "descontoPontualidadePeriodos": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/DescontoPontualidadePeriodoResponse"
-                        }
-                    }
-                }
-            },
-            "DescontoTipoCobrancaResponse": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "tipoCobranca": {
-                        "$ref": "#/components/schemas/TipoCobrancaResponse"
-                    }
-                }
-            },
-            "RateioResponse": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                }
-            },
-            "ResponseDefaultDescontoPontualidadeResponse": {
-                "type": "object",
-                "properties": {
-                    "response": {
-                        "$ref": "#/components/schemas/DescontoPontualidadeResponse"
-                    },
-                    "status": {
-                        "$ref": "#/components/schemas/StatusDefaultResponse"
-                    }
-                }
-            },
-            "TipoCobrancaResponse": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                }
-            },
-            "AdministradoraContaBancariaResponse": {
-                "type": "object",
-                "properties": {
-                    "idContaAdministradora": {
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                }
-            },
-            "CondominioContaBancariaAdministradoraResponse": {
-                "type": "object",
-                "properties": {
-                    "administradoraContaBancaria": {
-                        "$ref": "#/components/schemas/AdministradoraContaBancariaResponse"
-                    }
-                }
-            },
-            "ResponseDefaultCondominioContaBancariaAdministradoraResponse": {
-                "type": "object",
-                "properties": {
-                    "response": {
-                        "$ref": "#/components/schemas/CondominioContaBancariaAdministradoraResponse"
-                    },
-                    "status": {
-                        "$ref": "#/components/schemas/StatusDefaultResponse"
-                    }
-                }
-            },
-            "BancoResponse": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "codBacen": {
+                    "razaoSocial": {
                         "type": "string"
                     },
-                    "nome": {
+                    "cnpj": {
                         "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "parceira": {
+                        "type": "boolean"
                     }
                 }
             },
-            "CondominioContaBancariaResponse": {
+            "ResponseDefaultcondominioInternalResponse": {
+                "type": "object",
+                "properties": {
+                    "response": {
+                        "$ref": "#/components/schemas/condominioInternalResponse"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/StatusDefaultResponse"
+                    }
+                }
+            },
+            "condominioContaBancariaConsultaResponse": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -2572,443 +1788,13 @@
                     }
                 }
             },
-            "ResponseDefaultCondominioContaBancariaResponse": {
-                "type": "object",
-                "properties": {
-                    "response": {
-                        "$ref": "#/components/schemas/CondominioContaBancariaResponse"
-                    },
-                    "status": {
-                        "$ref": "#/components/schemas/StatusDefaultResponse"
-                    }
-                }
-            },
-            "CondominioInativarRequest": {
-                "required": [
-                    "motivo"
-                ],
-                "type": "object",
-                "properties": {
-                    "motivo": {
-                        "type": "string"
-                    }
-                }
-            },
-            "CondominioFiltros": {
-                "type": "object",
-                "properties": {
-                    "query": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    },
-                    "situacao": {
-                        "type": "string",
-                        "enum": [
-                            "ATIVO",
-                            "INATIVO",
-                            "PENDENTE",
-                            "DELETADO",
-                            "NAO_LANCADO",
-                            "LANCADO",
-                            "PROCESSADO",
-                            "PROCESSADO_COM_FALHA",
-                            "EM_PROCESSAMENTO",
-                            "FALHA",
-                            "AGUARDANDO_FINALIZACAO",
-                            "AGUARDANDO_EMISSAO",
-                            "AGUARDANDO_PAGAMENTO",
-                            "LIQUIDADO",
-                            "VENCIDO"
-                        ]
-                    },
-                    "estado": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "cidade": {
-                        "type": "string"
-                    },
-                    "bairro": {
-                        "type": "string"
-                    },
-                    "associado": {
-                        "type": "boolean"
-                    },
-                    "admRazaoSocial": {
-                        "type": "string"
-                    }
-                }
-            },
-            "PageableRequest": {
-                "type": "object",
-                "properties": {
-                    "page": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "size": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "orderBy": {
-                        "type": "string"
-                    },
-                    "sort": {
-                        "type": "string"
-                    }
-                }
-            },
-            "CondominioConsultaResponse": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "razaoSocial": {
-                        "type": "string"
-                    },
-                    "nomeFantasia": {
-                        "type": "string"
-                    },
-                    "cnpj": {
-                        "type": "string"
-                    },
-                    "sindico": {
-                        "$ref": "#/components/schemas/SindicoResponse"
-                    },
-                    "qtdUnidades": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "apelido": {
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "administradora": {
-                        "$ref": "#/components/schemas/AdministradoraResponse"
-                    },
-                    "telefones": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/TelefoneResponse"
-                        }
-                    },
-                    "endereco": {
-                        "$ref": "#/components/schemas/EnderecoResponse"
-                    },
-                    "situacao": {
-                        "type": "string",
-                        "enum": [
-                            "ATIVO",
-                            "INATIVO",
-                            "PENDENTE",
-                            "DELETADO",
-                            "NAO_LANCADO",
-                            "LANCADO",
-                            "PROCESSADO",
-                            "PROCESSADO_COM_FALHA",
-                            "EM_PROCESSAMENTO",
-                            "FALHA",
-                            "AGUARDANDO_FINALIZACAO",
-                            "AGUARDANDO_EMISSAO",
-                            "AGUARDANDO_PAGAMENTO",
-                            "LIQUIDADO",
-                            "VENCIDO"
-                        ]
-                    }
-                }
-            },
-            "PageResponseCondominioConsultaResponse": {
-                "type": "object",
-                "properties": {
-                    "content": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/CondominioConsultaResponse"
-                        }
-                    },
-                    "totalElements": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "totalPerPage": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "totalPages": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "page": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "first": {
-                        "type": "boolean"
-                    },
-                    "last": {
-                        "type": "boolean"
-                    },
-                    "empty": {
-                        "type": "boolean"
-                    }
-                }
-            },
-            "ResponseDefaultPageResponseCondominioConsultaResponse": {
-                "type": "object",
-                "properties": {
-                    "response": {
-                        "$ref": "#/components/schemas/PageResponseCondominioConsultaResponse"
-                    },
-                    "status": {
-                        "$ref": "#/components/schemas/StatusDefaultResponse"
-                    }
-                }
-            },
-            "CondominioDetalheResponse": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "administradora": {
-                        "$ref": "#/components/schemas/AdministradoraResponse"
-                    },
-                    "sindico": {
-                        "$ref": "#/components/schemas/SindicoResponse"
-                    },
-                    "dataInicioContrato": {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "dataFimContrato": {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "razaoSocial": {
-                        "type": "string"
-                    },
-                    "nomeFantasia": {
-                        "type": "string"
-                    },
-                    "inscricaoMunicipal": {
-                        "type": "string"
-                    },
-                    "inscricaoEstadual": {
-                        "type": "string"
-                    },
-                    "cnpj": {
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "apelido": {
-                        "type": "string"
-                    },
-                    "nomeResponsavel": {
-                        "type": "string"
-                    },
-                    "cargoResponsavel": {
-                        "type": "string"
-                    },
-                    "endereco": {
-                        "$ref": "#/components/schemas/EnderecoResponse"
-                    },
-                    "tipoDadoBancario": {
-                        "type": "string",
-                        "enum": [
-                            "BOLETO",
-                            "TRANS_BANCARIA_ADMINISTRADORA",
-                            "TRANS_BANCARIA_CONDOMINIO"
-                        ]
-                    },
-                    "contasBancarias": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/CondominioContaBancariaResponse"
-                        }
-                    },
-                    "administradoraContaBancaria": {
-                        "$ref": "#/components/schemas/AdministradoraContaBancariaResponse"
-                    },
-                    "telefones": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/TelefoneResponse"
-                        }
-                    },
-                    "documentos": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/DocumentoResponse"
-                        }
-                    },
-                    "motivoInativacao": {
-                        "type": "string"
-                    },
-                    "situacao": {
-                        "type": "string",
-                        "enum": [
-                            "ATIVO",
-                            "INATIVO",
-                            "PENDENTE",
-                            "DELETADO",
-                            "NAO_LANCADO",
-                            "LANCADO",
-                            "PROCESSADO",
-                            "PROCESSADO_COM_FALHA",
-                            "EM_PROCESSAMENTO",
-                            "FALHA",
-                            "AGUARDANDO_FINALIZACAO",
-                            "AGUARDANDO_EMISSAO",
-                            "AGUARDANDO_PAGAMENTO",
-                            "LIQUIDADO",
-                            "VENCIDO"
-                        ]
-                    },
-                    "dadosContratuais": {
-                        "$ref": "#/components/schemas/CondominioContratoResponse"
-                    }
-                }
-            },
-            "ResponseDefaultCondominioDetalheResponse": {
-                "type": "object",
-                "properties": {
-                    "response": {
-                        "$ref": "#/components/schemas/CondominioDetalheResponse"
-                    },
-                    "status": {
-                        "$ref": "#/components/schemas/StatusDefaultResponse"
-                    }
-                }
-            },
-            "DescontoPontualidadePadraoResponse": {
-                "type": "object",
-                "properties": {
-                    "condominio": {
-                        "$ref": "#/components/schemas/CondominioComIdResponse"
-                    },
-                    "tipoDesconto": {
-                        "type": "string",
-                        "enum": [
-                            "VALOR_SOB_TAXA_UNIDADE",
-                            "VALOR_SOB_TAXA_CONDOMINIO",
-                            "VALOR_ABATIDO_UNIDADE"
-                        ]
-                    },
-                    "tipoDias": {
-                        "type": "string",
-                        "enum": [
-                            "UTEIS",
-                            "CORRIDOS"
-                        ]
-                    },
-                    "valSeparadamente": {
-                        "type": "boolean"
-                    },
-                    "cobrarSindico": {
-                        "type": "boolean"
-                    },
-                    "cobrarSubsindico": {
-                        "type": "boolean"
-                    },
-                    "contabilizarRepasse": {
-                        "type": "boolean"
-                    },
-                    "repassarCondominio": {
-                        "type": "boolean"
-                    },
-                    "dtRepassarCondominio": {
-                        "type": "string",
-                        "format": "date"
-                    },
-                    "manterPadrao": {
-                        "type": "boolean"
-                    },
-                    "descontoPontualidadePeriodos": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/DescontoPontualidadePeriodoPadraoResponse"
-                        }
-                    }
-                }
-            },
-            "DescontoPontualidadePeriodoPadraoResponse": {
-                "type": "object",
-                "properties": {
-                    "valPerc": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "valMonetario": {
-                        "type": "number"
-                    },
-                    "numPeriodo": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "descontosTiposCobranca": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/DescontoTipoCobrancaPadraoResponse"
-                        }
-                    }
-                }
-            },
-            "DescontoTipoCobrancaPadraoResponse": {
-                "type": "object",
-                "properties": {
-                    "tipoCobranca": {
-                        "$ref": "#/components/schemas/TipoCobrancaResponse"
-                    }
-                }
-            },
-            "ResponseDefaultDescontoPontualidadePadraoResponse": {
-                "type": "object",
-                "properties": {
-                    "response": {
-                        "$ref": "#/components/schemas/DescontoPontualidadePadraoResponse"
-                    },
-                    "status": {
-                        "$ref": "#/components/schemas/StatusDefaultResponse"
-                    }
-                }
-            },
-            "CondominioAssociadoResponse": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    "razaoSocial": {
-                        "type": "string"
-                    },
-                    "email": {
-                        "type": "string"
-                    },
-                    "telefones": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/TelefoneResponse"
-                        }
-                    }
-                }
-            },
-            "ResponseDefaultListCondominioAssociadoResponse": {
+            "ResponseDefaultListcondominioContaBancariaConsultaResponse": {
                 "type": "object",
                 "properties": {
                     "response": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/CondominioAssociadoResponse"
+                            "$ref": "#/components/schemas/condominioContaBancariaConsultaResponse"
                         }
                     },
                     "status": {
