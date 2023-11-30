@@ -11,4 +11,5 @@ phases:
     commands:
       - |
       - chmod +x swagger/apigateway-update.sh
+      - sed -i -e 's/\r$//' swagger/apigateway-update.sh
       - ./swagger/apigateway-update.sh

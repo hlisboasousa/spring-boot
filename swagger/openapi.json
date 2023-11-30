@@ -1,28 +1,28 @@
 {
     "openapi": "3.0.1",
     "info": {
-        "title": "LLZ Garantidora - condominio",
+        "title": "LLZ Garantidora - unidade",
         "description": "API Rest da aplicação LLZ Operation",
         "version": "1.0.0"
     },
     "servers": [
         {
-            "url": "https://condominio.dev.llzgarantidora.com",
+            "url": "https://unidade.dev.llzgarantidora.com",
             "description": "Generated server url"
         }
     ],
     "paths": {
-        "/api/condominios/{condominioId}": {
+        "/api/unidades/{unidadeId}": {
             "get": {
                 "tags": [
-                    "condominios"
+                    "unidades"
                 ],
-                "summary": "Obter condominio por ID",
-                "description": "Serviço responsável por realizar consulta de condominio por ID",
+                "summary": "Obter unidade por ID",
+                "description": "Serviço responsável por realizar consulta de unidade por ID",
                 "operationId": "findCompleteById",
                 "parameters": [
                     {
-                        "name": "condominioId",
+                        "name": "unidadeId",
                         "in": "path",
                         "required": true,
                         "schema": {
@@ -37,7 +37,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultcondominioDetalheResponse"
+                                    "$ref": "#/components/schemas/ResponseDefaultunidadeDetalheResponse"
                                 }
                             }
                         }
@@ -79,14 +79,14 @@
             },
             "put": {
                 "tags": [
-                    "condominios"
+                    "unidades"
                 ],
-                "summary": "Atualizar condominio",
-                "description": "Serviço responsável por realizar atualização de condominio",
+                "summary": "Atualizar unidade",
+                "description": "Serviço responsável por realizar atualização de unidade",
                 "operationId": "update",
                 "parameters": [
                     {
-                        "name": "condominioId",
+                        "name": "unidadeId",
                         "in": "path",
                         "required": true,
                         "schema": {
@@ -99,7 +99,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/condominioRequest"
+                                "$ref": "#/components/schemas/unidadeRequest"
                             }
                         }
                     },
@@ -111,7 +111,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultcondominioResponse"
+                                    "$ref": "#/components/schemas/ResponseDefaultunidadeResponse"
                                 }
                             }
                         }
@@ -153,14 +153,14 @@
             },
             "delete": {
                 "tags": [
-                    "condominios"
+                    "unidades"
                 ],
-                "summary": "Deleção lógica de condominio",
-                "description": "Serviço responsável por realizar deleção lógica de condominio por ID",
+                "summary": "Deleção lógica de unidade",
+                "description": "Serviço responsável por realizar deleção lógica de unidade por ID",
                 "operationId": "delete",
                 "parameters": [
                     {
-                        "name": "condominioId",
+                        "name": "unidadeId",
                         "in": "path",
                         "required": true,
                         "schema": {
@@ -216,13 +216,13 @@
                 }
             }
         },
-        "/api/condominios": {
+        "/api/unidades": {
             "get": {
                 "tags": [
-                    "condominios"
+                    "unidades"
                 ],
-                "summary": "Listar condominios",
-                "description": "Serviço responsável por listar as condominios",
+                "summary": "Listar unidades",
+                "description": "Serviço responsável por listar as unidades",
                 "operationId": "findByCondition",
                 "parameters": [
                     {
@@ -230,7 +230,7 @@
                         "in": "query",
                         "required": false,
                         "schema": {
-                            "$ref": "#/components/schemas/condominioFiltros"
+                            "$ref": "#/components/schemas/unidadeFiltros"
                         }
                     },
                     {
@@ -248,7 +248,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultPageResponsecondominioConsultaResponse"
+                                    "$ref": "#/components/schemas/ResponseDefaultPageResponseunidadeConsultaResponse"
                                 }
                             }
                         }
@@ -290,16 +290,16 @@
             },
             "post": {
                 "tags": [
-                    "condominios"
+                    "unidades"
                 ],
-                "summary": "Criar condominio",
-                "description": "Serviço responsável por criar nova condominio",
+                "summary": "Criar unidade",
+                "description": "Serviço responsável por criar nova unidade",
                 "operationId": "save",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/condominioRequest"
+                                "$ref": "#/components/schemas/unidadeRequest"
                             }
                         }
                     },
@@ -311,7 +311,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultcondominioResponse"
+                                    "$ref": "#/components/schemas/ResponseDefaultunidadeResponse"
                                 }
                             }
                         }
@@ -352,19 +352,19 @@
                 }
             }
         },
-        "/api/condominios/{condominioId}/contas-bancarias": {
+        "/api/unidades/{unidadeId}/contas-bancarias": {
             "get": {
                 "tags": [
                     "Conta Bancária"
                 ],
                 "summary": "Listar contas bancárias",
-                "description": "Serviço responsável por listar as contas bancárias da condominio",
-                "operationId": "findAllBycondominioId",
+                "description": "Serviço responsável por listar as contas bancárias da unidade",
+                "operationId": "findAllByunidadeId",
                 "parameters": [
                     {
-                        "name": "condominioId",
+                        "name": "unidadeId",
                         "in": "path",
-                        "description": "ID da condominio",
+                        "description": "ID da unidade",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -377,7 +377,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultListcondominioContaBancariaConsultaResponse"
+                                    "$ref": "#/components/schemas/ResponseDefaultListunidadeContaBancariaConsultaResponse"
                                 }
                             }
                         }
@@ -426,9 +426,9 @@
                 "operationId": "save_1",
                 "parameters": [
                     {
-                        "name": "condominioId",
+                        "name": "unidadeId",
                         "in": "path",
-                        "description": "ID da condominio",
+                        "description": "ID da unidade",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -439,7 +439,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/condominioContaBancariaRequest"
+                                "$ref": "#/components/schemas/unidadeContaBancariaRequest"
                             }
                         }
                     },
@@ -451,7 +451,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultcondominioContaBancariaResponse"
+                                    "$ref": "#/components/schemas/ResponseDefaultunidadeContaBancariaResponse"
                                 }
                             }
                         }
@@ -492,7 +492,7 @@
                 }
             }
         },
-        "/api/condominios/{condominioId}/contas-bancarias/{contaBancariaId}/principal": {
+        "/api/unidades/{unidadeId}/contas-bancarias/{contaBancariaId}/principal": {
             "patch": {
                 "tags": [
                     "Conta Bancária"
@@ -502,9 +502,9 @@
                 "operationId": "alteraContaBancariaPrincipal",
                 "parameters": [
                     {
-                        "name": "condominioId",
+                        "name": "unidadeId",
                         "in": "path",
-                        "description": "ID da condominio",
+                        "description": "ID da unidade",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -567,17 +567,17 @@
                 }
             }
         },
-        "/api/condominios/inativar/{condominioId}": {
+        "/api/unidades/inativares/{unidadeId}": {
             "patch": {
                 "tags": [
-                    "condominios"
+                    "unidades"
                 ],
-                "summary": "Inativar condominio",
-                "description": "Serviço responsável por realizar inativação de condominio por ID",
+                "summary": "Inativar unidade",
+                "description": "Serviço responsável por realizar inativação de unidade por ID",
                 "operationId": "inativar",
                 "parameters": [
                     {
-                        "name": "condominioId",
+                        "name": "unidadeId",
                         "in": "path",
                         "required": true,
                         "schema": {
@@ -590,7 +590,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/condominioInativarRequest"
+                                "$ref": "#/components/schemas/unidadeInativarRequest"
                             }
                         }
                     },
@@ -643,73 +643,7 @@
                 }
             }
         },
-        "/api/condominios/{condominioId}/internal": {
-            "get": {
-                "tags": [
-                    "condominios"
-                ],
-                "summary": "Obter condominio por ID",
-                "description": "Serviço responsável por realizar consulta de condominio por ID e não retonar dados de entidades relacionadas",
-                "operationId": "findInternalById",
-                "parameters": [
-                    {
-                        "name": "condominioId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultcondominioInternalResponse"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefault"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {}
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {}
-                    },
-                    "502": {
-                        "description": "Bad Gateway"
-                    },
-                    "503": {
-                        "description": "Service Unavailable"
-                    },
-                    "504": {
-                        "description": "Gateway Timeout"
-                    }
-                }
-            }
-        },
-        "/api/condominios/{condominioId}/contas-bancarias/{contaBancariaId}": {
+        "/api/unidades/{unidadeId}/contas-bancarias/{contaBancariaId}": {
             "delete": {
                 "tags": [
                     "Conta Bancária"
@@ -719,9 +653,9 @@
                 "operationId": "delete_1",
                 "parameters": [
                     {
-                        "name": "condominioId",
+                        "name": "unidadeId",
                         "in": "path",
-                        "description": "ID da condominio",
+                        "description": "ID da unidade",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -804,7 +738,7 @@
                     }
                 }
             },
-            "condominioRequest": {
+            "unidadeRequest": {
                 "required": [
                     "cnpj"
                 ],
@@ -846,8 +780,8 @@
                         "type": "string",
                         "enum": [
                             "BOLETO",
-                            "TRANS_BANCARIA_condominio",
-                            "TRANS_BANCARIA_CONDOMINIO"
+                            "TRANS_BANCARIA_unidade",
+                            "TRANS_BANCARIA_unidade"
                         ]
                     },
                     "endereco": {
@@ -865,10 +799,10 @@
                             "$ref": "#/components/schemas/PessoaRequest"
                         }
                     },
-                    "condominios": {
+                    "unidades": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/CondominioAssociadoRequest"
+                            "$ref": "#/components/schemas/unidadeAssociadoRequest"
                         }
                     },
                     "documentos": {
@@ -879,7 +813,7 @@
                     }
                 }
             },
-            "CondominioAssociadoRequest": {
+            "unidadeAssociadoRequest": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -905,7 +839,7 @@
                             "DOCUMENTO_FOTO_RESPONSAVEL_EMPRESA",
                             "CARTAO_CNPJ",
                             "DADOS_BANCARIOS",
-                            "CNPJ_CONDOMINIO",
+                            "CNPJ_unidade",
                             "CONVENCAO",
                             "ATA",
                             "RG_CNH_SINDICO",
@@ -1027,7 +961,7 @@
                         "type": "integer",
                         "format": "int64"
                     },
-                    "condominioId": {
+                    "unidadeId": {
                         "type": "integer",
                         "format": "int64"
                     },
@@ -1064,7 +998,7 @@
                     }
                 }
             },
-            "condominioResponse": {
+            "unidadeResponse": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -1107,8 +1041,8 @@
                         "type": "string",
                         "enum": [
                             "BOLETO",
-                            "TRANS_BANCARIA_condominio",
-                            "TRANS_BANCARIA_CONDOMINIO"
+                            "TRANS_BANCARIA_unidade",
+                            "TRANS_BANCARIA_unidade"
                         ]
                     },
                     "motivoInativacao": {
@@ -1154,18 +1088,18 @@
                     }
                 }
             },
-            "ResponseDefaultcondominioResponse": {
+            "ResponseDefaultunidadeResponse": {
                 "type": "object",
                 "properties": {
                     "response": {
-                        "$ref": "#/components/schemas/condominioResponse"
+                        "$ref": "#/components/schemas/unidadeResponse"
                     },
                     "status": {
                         "$ref": "#/components/schemas/StatusDefaultResponse"
                     }
                 }
             },
-            "condominioContaBancariaRequest": {
+            "unidadeContaBancariaRequest": {
                 "required": [
                     "agencia",
                     "banco",
@@ -1217,7 +1151,7 @@
                     }
                 }
             },
-            "condominioContaBancariaResponse": {
+            "unidadeContaBancariaResponse": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -1270,11 +1204,11 @@
                     }
                 }
             },
-            "ResponseDefaultcondominioContaBancariaResponse": {
+            "ResponseDefaultunidadeContaBancariaResponse": {
                 "type": "object",
                 "properties": {
                     "response": {
-                        "$ref": "#/components/schemas/condominioContaBancariaResponse"
+                        "$ref": "#/components/schemas/unidadeContaBancariaResponse"
                     },
                     "status": {
                         "$ref": "#/components/schemas/StatusDefaultResponse"
@@ -1292,7 +1226,7 @@
                     }
                 }
             },
-            "condominioInativarRequest": {
+            "unidadeInativarRequest": {
                 "required": [
                     "motivo"
                 ],
@@ -1303,7 +1237,7 @@
                     }
                 }
             },
-            "condominioFiltros": {
+            "unidadeFiltros": {
                 "type": "object",
                 "properties": {
                     "query": {
@@ -1339,7 +1273,7 @@
                     }
                 }
             },
-            "condominioConsultaResponse": {
+            "unidadeConsultaResponse": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -1358,11 +1292,11 @@
                     "parceira": {
                         "type": "boolean"
                     },
-                    "qtdCondominios": {
+                    "qtdunidades": {
                         "type": "integer",
                         "format": "int64"
                     },
-                    "totalReceitasCondominios": {
+                    "totalReceitasunidades": {
                         "type": "number",
                         "format": "double"
                     },
@@ -1443,13 +1377,13 @@
                     }
                 }
             },
-            "PageResponsecondominioConsultaResponse": {
+            "PageResponseunidadeConsultaResponse": {
                 "type": "object",
                 "properties": {
                     "content": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/condominioConsultaResponse"
+                            "$ref": "#/components/schemas/unidadeConsultaResponse"
                         }
                     },
                     "totalElements": {
@@ -1475,18 +1409,18 @@
                     }
                 }
             },
-            "ResponseDefaultPageResponsecondominioConsultaResponse": {
+            "ResponseDefaultPageResponseunidadeConsultaResponse": {
                 "type": "object",
                 "properties": {
                     "response": {
-                        "$ref": "#/components/schemas/PageResponsecondominioConsultaResponse"
+                        "$ref": "#/components/schemas/PageResponseunidadeConsultaResponse"
                     },
                     "status": {
                         "$ref": "#/components/schemas/StatusDefaultResponse"
                     }
                 }
             },
-            "condominioDetalheResponse": {
+            "unidadeDetalheResponse": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -1526,14 +1460,14 @@
                         "type": "string",
                         "enum": [
                             "BOLETO",
-                            "TRANS_BANCARIA_condominio",
-                            "TRANS_BANCARIA_CONDOMINIO"
+                            "TRANS_BANCARIA_unidade",
+                            "TRANS_BANCARIA_unidade"
                         ]
                     },
                     "contasBancarias": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/condominioContaBancariaResponse"
+                            "$ref": "#/components/schemas/unidadeContaBancariaResponse"
                         }
                     },
                     "telefones": {
@@ -1554,10 +1488,10 @@
                             "$ref": "#/components/schemas/DocumentoResponse"
                         }
                     },
-                    "condominios": {
+                    "unidades": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/CondominioAssociadoResponse"
+                            "$ref": "#/components/schemas/unidadeAssociadoResponse"
                         }
                     },
                     "motivoInativacao": {
@@ -1585,7 +1519,7 @@
                     }
                 }
             },
-            "CondominioAssociadoResponse": {
+            "unidadeAssociadoResponse": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -1623,7 +1557,7 @@
                             "DOCUMENTO_FOTO_RESPONSAVEL_EMPRESA",
                             "CARTAO_CNPJ",
                             "DADOS_BANCARIOS",
-                            "CNPJ_CONDOMINIO",
+                            "CNPJ_unidade",
                             "CONVENCAO",
                             "ATA",
                             "RG_CNH_SINDICO",
@@ -1678,11 +1612,11 @@
                     }
                 }
             },
-            "ResponseDefaultcondominioDetalheResponse": {
+            "ResponseDefaultunidadeDetalheResponse": {
                 "type": "object",
                 "properties": {
                     "response": {
-                        "$ref": "#/components/schemas/condominioDetalheResponse"
+                        "$ref": "#/components/schemas/unidadeDetalheResponse"
                     },
                     "status": {
                         "$ref": "#/components/schemas/StatusDefaultResponse"
@@ -1718,7 +1652,7 @@
                     }
                 }
             },
-            "condominioInternalResponse": {
+            "unidadeInternalResponse": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -1739,18 +1673,18 @@
                     }
                 }
             },
-            "ResponseDefaultcondominioInternalResponse": {
+            "ResponseDefaultunidadeInternalResponse": {
                 "type": "object",
                 "properties": {
                     "response": {
-                        "$ref": "#/components/schemas/condominioInternalResponse"
+                        "$ref": "#/components/schemas/unidadeInternalResponse"
                     },
                     "status": {
                         "$ref": "#/components/schemas/StatusDefaultResponse"
                     }
                 }
             },
-            "condominioContaBancariaConsultaResponse": {
+            "unidadeContaBancariaConsultaResponse": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -1788,13 +1722,13 @@
                     }
                 }
             },
-            "ResponseDefaultListcondominioContaBancariaConsultaResponse": {
+            "ResponseDefaultListunidadeContaBancariaConsultaResponse": {
                 "type": "object",
                 "properties": {
                     "response": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/condominioContaBancariaConsultaResponse"
+                            "$ref": "#/components/schemas/unidadeContaBancariaConsultaResponse"
                         }
                     },
                     "status": {

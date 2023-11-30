@@ -3,29 +3,28 @@
 # This script does the following:
 #   - formats the OpenAPI file to be compatible with API Gateway. 
 #   - updates the API Gateway definition.
-#   - deploys the API Gateway to the stage environment provided as argument
+#   - deploys the API Gateway to the environment provided as argument
 #   - updates the Swagger UI docs in S3.
+# Function to process each path in the OpenAPI file and to add the aws-apigateway-integration block
 
 SWAGGER_BUCKET="$ENV-api-swagger"
 
-API_ID=$(aws apigateway get-rest-apis --query 'items[?name==`LLZ-DEV`].[id]' --output text)
+API_ID=$(aws apigateway get-rest-apis --query "items[?contains(name, 'DEV')].[id]" --output text)
 if [ $? -ne 0 ]; then
     echo "Error: Failed to get the API ID."
     exit 1
 fi
 
-# Function to process each path in the OpenAPI file and to add the aws-apigateway-integration block
-insert_aws_integration() {
+insert_aws_integration_info() {
   local path_name="$1"
   local path_data="$2"
 
   # Loop through each method for the path
   for method in $(echo "$path_data" | jq -r 'keys[]'); do
     # Extract method, path, and parameters
-    local path=$(echo "$path_name" | sed 's/^{.*}$/\\1/g')  # Extract path and remove curly braces if present
+    local path=$(echo "$path_name" | sed 's/^{.*}$/\\1/g')
     local parameters=$(echo "$path_data" | jq -r ".$method.parameters[]?.name")
 
-    # Generate output for x-amazon-apigateway-integration
     integration_block=$(cat <<-EOL
 {
   "x-amazon-apigateway-integration": {
@@ -56,6 +55,8 @@ EOL
   done
 }
 
+# ---------------------------------INIT---------------------------------
+
 # Extract paths from the OpenAPI file
 paths=$(jq -c '.paths | to_entries[]' "$OPENAPI_JSON_PATH")
 
@@ -66,7 +67,7 @@ openapi_data=$(cat "$OPENAPI_JSON_PATH")
 while IFS= read -r path_entry; do
   path_name=$(echo "$path_entry" | jq -r '.key')
   path_data=$(echo "$path_entry" | jq -c -r '.value')
-  insert_aws_integration "$path_name" "$path_data"
+  insert_aws_integration_info "$path_name" "$path_data"
 done <<< "$paths"
 
 # Add/overwrite the securitySchemes object directly
