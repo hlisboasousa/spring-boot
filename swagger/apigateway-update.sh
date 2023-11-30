@@ -5,9 +5,6 @@
 #   - updates the API Gateway definition.
 #   - deploys the API Gateway to the environment provided as argument
 #   - updates the Swagger UI docs in S3.
-# Function to process each path in the OpenAPI file and to add the aws-apigateway-integration block
-
-SWAGGER_BUCKET="$ENV-api-swagger"
 
 API_ID=$(aws apigateway get-rest-apis --query "items[?contains(name, 'DEV')].[id]" --output text)
 if [ $? -ne 0 ]; then
@@ -15,6 +12,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+# Function to process each path in the OpenAPI file and to add the aws-apigateway-integration block
 insert_aws_integration_info() {
   local path_name="$1"
   local path_data="$2"
