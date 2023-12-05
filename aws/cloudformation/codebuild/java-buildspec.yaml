@@ -4,7 +4,7 @@ env:
     ECS_SERVICE_NAME: $ECS_SERVICE_NAME
     ENVIRONMENT:  $ENVIRONMENT
     SWAGGER_BUCKET: $ENVIRONMENT-api-swagger
-    BASE_URI: https://$ECS_SERVICE_NAME.$ENVIRONMENT.llzgarantidora.com
+    BASE_URI: https://administradora.dev.llzgarantidora.com
     OPENAPI_JSON_PATH: swagger/openapi.json
 phases:
   build:
