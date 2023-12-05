@@ -9,4 +9,4 @@ env:
 phases:
   build:
     commands:
-      - ./apigateway-update.sh
+      - apigateway-update.sh
