@@ -1,28 +1,28 @@
 {
     "openapi": "3.0.1",
     "info": {
-        "title": "LLZ Garantidora - unidade",
+        "title": "LLZ Garantidora - Administradora",
         "description": "API Rest da aplicação LLZ Operation",
         "version": "1.0.0"
     },
     "servers": [
         {
-            "url": "https://unidade.dev.llzgarantidora.com",
+            "url": "https://administradora.dev.llzgarantidora.com",
             "description": "Generated server url"
         }
     ],
     "paths": {
-        "/api/unidades/{unidadeId}": {
+        "/api/administradoras/{administradoraId}": {
             "get": {
                 "tags": [
-                    "unidades"
+                    "Administradoras"
                 ],
-                "summary": "Obter unidade por ID",
-                "description": "Serviço responsável por realizar consulta de unidade por ID",
+                "summary": "Obter administradora por ID",
+                "description": "Serviço responsável por realizar consulta de administradora por ID",
                 "operationId": "findCompleteById",
                 "parameters": [
                     {
-                        "name": "unidadeId",
+                        "name": "administradoraId",
                         "in": "path",
                         "required": true,
                         "schema": {
@@ -37,7 +37,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultunidadeDetalheResponse"
+                                    "$ref": "#/components/schemas/ResponseDefaultAdministradoraDetalheResponse"
                                 }
                             }
                         }
@@ -79,14 +79,14 @@
             },
             "put": {
                 "tags": [
-                    "unidades"
+                    "Administradoras"
                 ],
-                "summary": "Atualizar unidade",
-                "description": "Serviço responsável por realizar atualização de unidade",
+                "summary": "Atualizar administradora",
+                "description": "Serviço responsável por realizar atualização de administradora",
                 "operationId": "update",
                 "parameters": [
                     {
-                        "name": "unidadeId",
+                        "name": "administradoraId",
                         "in": "path",
                         "required": true,
                         "schema": {
@@ -99,7 +99,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/unidadeRequest"
+                                "$ref": "#/components/schemas/AdministradoraRequest"
                             }
                         }
                     },
@@ -111,7 +111,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultunidadeResponse"
+                                    "$ref": "#/components/schemas/ResponseDefaultAdministradoraResponse"
                                 }
                             }
                         }
@@ -153,14 +153,14 @@
             },
             "delete": {
                 "tags": [
-                    "unidades"
+                    "Administradoras"
                 ],
-                "summary": "Deleção lógica de unidade",
-                "description": "Serviço responsável por realizar deleção lógica de unidade por ID",
+                "summary": "Deleção lógica de administradora",
+                "description": "Serviço responsável por realizar deleção lógica de administradora por ID",
                 "operationId": "delete",
                 "parameters": [
                     {
-                        "name": "unidadeId",
+                        "name": "administradoraId",
                         "in": "path",
                         "required": true,
                         "schema": {
@@ -216,13 +216,13 @@
                 }
             }
         },
-        "/api/unidades": {
+        "/api/administradoras": {
             "get": {
                 "tags": [
-                    "unidades"
+                    "Administradoras"
                 ],
-                "summary": "Listar unidades",
-                "description": "Serviço responsável por listar as unidades",
+                "summary": "Listar administradoras",
+                "description": "Serviço responsável por listar as administradoras",
                 "operationId": "findByCondition",
                 "parameters": [
                     {
@@ -230,7 +230,7 @@
                         "in": "query",
                         "required": false,
                         "schema": {
-                            "$ref": "#/components/schemas/unidadeFiltros"
+                            "$ref": "#/components/schemas/AdministradoraFiltros"
                         }
                     },
                     {
@@ -248,7 +248,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultPageResponseunidadeConsultaResponse"
+                                    "$ref": "#/components/schemas/ResponseDefaultPageResponseAdministradoraConsultaResponse"
                                 }
                             }
                         }
@@ -290,16 +290,16 @@
             },
             "post": {
                 "tags": [
-                    "unidades"
+                    "Administradoras"
                 ],
-                "summary": "Criar unidade",
-                "description": "Serviço responsável por criar nova unidade",
+                "summary": "Criar administradora",
+                "description": "Serviço responsável por criar nova administradora",
                 "operationId": "save",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/unidadeRequest"
+                                "$ref": "#/components/schemas/AdministradoraRequest"
                             }
                         }
                     },
@@ -311,7 +311,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultunidadeResponse"
+                                    "$ref": "#/components/schemas/ResponseDefaultAdministradoraResponse"
                                 }
                             }
                         }
@@ -352,19 +352,19 @@
                 }
             }
         },
-        "/api/unidades/{unidadeId}/contas-bancarias": {
+        "/api/administradoras/{administradoraId}/contas-bancarias": {
             "get": {
                 "tags": [
                     "Conta Bancária"
                 ],
                 "summary": "Listar contas bancárias",
-                "description": "Serviço responsável por listar as contas bancárias da unidade",
-                "operationId": "findAllByunidadeId",
+                "description": "Serviço responsável por listar as contas bancárias da Administradora",
+                "operationId": "findAllByAdministradoraId",
                 "parameters": [
                     {
-                        "name": "unidadeId",
+                        "name": "administradoraId",
                         "in": "path",
-                        "description": "ID da unidade",
+                        "description": "ID da Administradora",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -377,7 +377,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultListunidadeContaBancariaConsultaResponse"
+                                    "$ref": "#/components/schemas/ResponseDefaultListAdministradoraContaBancariaConsultaResponse"
                                 }
                             }
                         }
@@ -426,9 +426,9 @@
                 "operationId": "save_1",
                 "parameters": [
                     {
-                        "name": "unidadeId",
+                        "name": "administradoraId",
                         "in": "path",
-                        "description": "ID da unidade",
+                        "description": "ID da Administradora",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -439,7 +439,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/unidadeContaBancariaRequest"
+                                "$ref": "#/components/schemas/AdministradoraContaBancariaRequest"
                             }
                         }
                     },
@@ -451,7 +451,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/ResponseDefaultunidadeContaBancariaResponse"
+                                    "$ref": "#/components/schemas/ResponseDefaultAdministradoraContaBancariaResponse"
                                 }
                             }
                         }
@@ -492,7 +492,7 @@
                 }
             }
         },
-        "/api/unidades/{unidadeId}/contas-bancarias/{contaBancariaId}/principal": {
+        "/api/administradoras/{administradoraId}/contas-bancarias/{contaBancariaId}/principal": {
             "patch": {
                 "tags": [
                     "Conta Bancária"
@@ -502,9 +502,9 @@
                 "operationId": "alteraContaBancariaPrincipal",
                 "parameters": [
                     {
-                        "name": "unidadeId",
+                        "name": "administradoraId",
                         "in": "path",
-                        "description": "ID da unidade",
+                        "description": "ID da Administradora",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -567,17 +567,17 @@
                 }
             }
         },
-        "/api/unidades/inativares/{unidadeId}": {
+        "/api/administradoras/inativar/{administradoraId}": {
             "patch": {
                 "tags": [
-                    "unidades"
+                    "Administradoras"
                 ],
-                "summary": "Inativar unidade",
-                "description": "Serviço responsável por realizar inativação de unidade por ID",
+                "summary": "Inativar administradora",
+                "description": "Serviço responsável por realizar inativação de administradora por ID",
                 "operationId": "inativar",
                 "parameters": [
                     {
-                        "name": "unidadeId",
+                        "name": "administradoraId",
                         "in": "path",
                         "required": true,
                         "schema": {
@@ -590,7 +590,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/unidadeInativarRequest"
+                                "$ref": "#/components/schemas/AdministradoraInativarRequest"
                             }
                         }
                     },
@@ -643,7 +643,73 @@
                 }
             }
         },
-        "/api/unidades/{unidadeId}/contas-bancarias/{contaBancariaId}": {
+        "/api/administradoras/{administradoraId}/internal": {
+            "get": {
+                "tags": [
+                    "Administradoras"
+                ],
+                "summary": "Obter administradora por ID",
+                "description": "Serviço responsável por realizar consulta de administradora por ID e não retonar dados de entidades relacionadas",
+                "operationId": "findInternalById",
+                "parameters": [
+                    {
+                        "name": "administradoraId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseDefaultAdministradoraInternalResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseDefault"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {}
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {}
+                    },
+                    "502": {
+                        "description": "Bad Gateway"
+                    },
+                    "503": {
+                        "description": "Service Unavailable"
+                    },
+                    "504": {
+                        "description": "Gateway Timeout"
+                    }
+                }
+            }
+        },
+        "/api/administradoras/{administradoraId}/contas-bancarias/{contaBancariaId}": {
             "delete": {
                 "tags": [
                     "Conta Bancária"
@@ -653,9 +719,9 @@
                 "operationId": "delete_1",
                 "parameters": [
                     {
-                        "name": "unidadeId",
+                        "name": "administradoraId",
                         "in": "path",
-                        "description": "ID da unidade",
+                        "description": "ID da Administradora",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -738,7 +804,7 @@
                     }
                 }
             },
-            "unidadeRequest": {
+            "AdministradoraRequest": {
                 "required": [
                     "cnpj"
                 ],
@@ -780,8 +846,8 @@
                         "type": "string",
                         "enum": [
                             "BOLETO",
-                            "TRANS_BANCARIA_unidade",
-                            "TRANS_BANCARIA_unidade"
+                            "TRANS_BANCARIA_ADMINISTRADORA",
+                            "TRANS_BANCARIA_CONDOMINIO"
                         ]
                     },
                     "endereco": {
@@ -799,10 +865,10 @@
                             "$ref": "#/components/schemas/PessoaRequest"
                         }
                     },
-                    "unidades": {
+                    "condominios": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/unidadeAssociadoRequest"
+                            "$ref": "#/components/schemas/CondominioAssociadoRequest"
                         }
                     },
                     "documentos": {
@@ -813,7 +879,7 @@
                     }
                 }
             },
-            "unidadeAssociadoRequest": {
+            "CondominioAssociadoRequest": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -839,7 +905,7 @@
                             "DOCUMENTO_FOTO_RESPONSAVEL_EMPRESA",
                             "CARTAO_CNPJ",
                             "DADOS_BANCARIOS",
-                            "CNPJ_unidade",
+                            "CNPJ_CONDOMINIO",
                             "CONVENCAO",
                             "ATA",
                             "RG_CNH_SINDICO",
@@ -961,7 +1027,7 @@
                         "type": "integer",
                         "format": "int64"
                     },
-                    "unidadeId": {
+                    "administradoraId": {
                         "type": "integer",
                         "format": "int64"
                     },
@@ -998,7 +1064,7 @@
                     }
                 }
             },
-            "unidadeResponse": {
+            "AdministradoraResponse": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -1041,8 +1107,8 @@
                         "type": "string",
                         "enum": [
                             "BOLETO",
-                            "TRANS_BANCARIA_unidade",
-                            "TRANS_BANCARIA_unidade"
+                            "TRANS_BANCARIA_ADMINISTRADORA",
+                            "TRANS_BANCARIA_CONDOMINIO"
                         ]
                     },
                     "motivoInativacao": {
@@ -1063,9 +1129,22 @@
                             "FALHA",
                             "AGUARDANDO_FINALIZACAO",
                             "AGUARDANDO_EMISSAO",
+                            "EM_FILA_EMISSAO",
                             "AGUARDANDO_PAGAMENTO",
-                            "LIQUIDADO",
-                            "VENCIDO"
+                            "PAGO",
+                            "VENCIDO",
+                            "ENQUEUED",
+                            "PROCESSING",
+                            "ERROR",
+                            "CREATED",
+                            "PROCESSING_PAYMENT",
+                            "PAID",
+                            "REVERSED",
+                            "CANCELING",
+                            "CANCELED",
+                            "CANCEL_FAILED",
+                            "UPDATED",
+                            "UPDATED_FAILED"
                         ]
                     }
                 }
@@ -1088,18 +1167,18 @@
                     }
                 }
             },
-            "ResponseDefaultunidadeResponse": {
+            "ResponseDefaultAdministradoraResponse": {
                 "type": "object",
                 "properties": {
                     "response": {
-                        "$ref": "#/components/schemas/unidadeResponse"
+                        "$ref": "#/components/schemas/AdministradoraResponse"
                     },
                     "status": {
                         "$ref": "#/components/schemas/StatusDefaultResponse"
                     }
                 }
             },
-            "unidadeContaBancariaRequest": {
+            "AdministradoraContaBancariaRequest": {
                 "required": [
                     "agencia",
                     "banco",
@@ -1151,7 +1230,7 @@
                     }
                 }
             },
-            "unidadeContaBancariaResponse": {
+            "AdministradoraContaBancariaResponse": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -1204,11 +1283,11 @@
                     }
                 }
             },
-            "ResponseDefaultunidadeContaBancariaResponse": {
+            "ResponseDefaultAdministradoraContaBancariaResponse": {
                 "type": "object",
                 "properties": {
                     "response": {
-                        "$ref": "#/components/schemas/unidadeContaBancariaResponse"
+                        "$ref": "#/components/schemas/AdministradoraContaBancariaResponse"
                     },
                     "status": {
                         "$ref": "#/components/schemas/StatusDefaultResponse"
@@ -1226,7 +1305,7 @@
                     }
                 }
             },
-            "unidadeInativarRequest": {
+            "AdministradoraInativarRequest": {
                 "required": [
                     "motivo"
                 ],
@@ -1237,7 +1316,7 @@
                     }
                 }
             },
-            "unidadeFiltros": {
+            "AdministradoraFiltros": {
                 "type": "object",
                 "properties": {
                     "query": {
@@ -1273,7 +1352,7 @@
                     }
                 }
             },
-            "unidadeConsultaResponse": {
+            "AdministradoraConsultaResponse": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -1292,11 +1371,11 @@
                     "parceira": {
                         "type": "boolean"
                     },
-                    "qtdunidades": {
+                    "qtdCondominios": {
                         "type": "integer",
                         "format": "int64"
                     },
-                    "totalReceitasunidades": {
+                    "totalReceitasCondominios": {
                         "type": "number",
                         "format": "double"
                     },
@@ -1318,9 +1397,22 @@
                             "FALHA",
                             "AGUARDANDO_FINALIZACAO",
                             "AGUARDANDO_EMISSAO",
+                            "EM_FILA_EMISSAO",
                             "AGUARDANDO_PAGAMENTO",
-                            "LIQUIDADO",
-                            "VENCIDO"
+                            "PAGO",
+                            "VENCIDO",
+                            "ENQUEUED",
+                            "PROCESSING",
+                            "ERROR",
+                            "CREATED",
+                            "PROCESSING_PAYMENT",
+                            "PAID",
+                            "REVERSED",
+                            "CANCELING",
+                            "CANCELED",
+                            "CANCEL_FAILED",
+                            "UPDATED",
+                            "UPDATED_FAILED"
                         ]
                     }
                 }
@@ -1377,16 +1469,20 @@
                     }
                 }
             },
-            "PageResponseunidadeConsultaResponse": {
+            "PageResponseAdministradoraConsultaResponse": {
                 "type": "object",
                 "properties": {
                     "content": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/unidadeConsultaResponse"
+                            "$ref": "#/components/schemas/AdministradoraConsultaResponse"
                         }
                     },
                     "totalElements": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "totalPerPage": {
                         "type": "integer",
                         "format": "int64"
                     },
@@ -1409,18 +1505,18 @@
                     }
                 }
             },
-            "ResponseDefaultPageResponseunidadeConsultaResponse": {
+            "ResponseDefaultPageResponseAdministradoraConsultaResponse": {
                 "type": "object",
                 "properties": {
                     "response": {
-                        "$ref": "#/components/schemas/PageResponseunidadeConsultaResponse"
+                        "$ref": "#/components/schemas/PageResponseAdministradoraConsultaResponse"
                     },
                     "status": {
                         "$ref": "#/components/schemas/StatusDefaultResponse"
                     }
                 }
             },
-            "unidadeDetalheResponse": {
+            "AdministradoraDetalheResponse": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -1460,14 +1556,14 @@
                         "type": "string",
                         "enum": [
                             "BOLETO",
-                            "TRANS_BANCARIA_unidade",
-                            "TRANS_BANCARIA_unidade"
+                            "TRANS_BANCARIA_ADMINISTRADORA",
+                            "TRANS_BANCARIA_CONDOMINIO"
                         ]
                     },
                     "contasBancarias": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/unidadeContaBancariaResponse"
+                            "$ref": "#/components/schemas/AdministradoraContaBancariaResponse"
                         }
                     },
                     "telefones": {
@@ -1488,10 +1584,10 @@
                             "$ref": "#/components/schemas/DocumentoResponse"
                         }
                     },
-                    "unidades": {
+                    "condominios": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/unidadeAssociadoResponse"
+                            "$ref": "#/components/schemas/CondominioAssociadoResponse"
                         }
                     },
                     "motivoInativacao": {
@@ -1512,14 +1608,27 @@
                             "FALHA",
                             "AGUARDANDO_FINALIZACAO",
                             "AGUARDANDO_EMISSAO",
+                            "EM_FILA_EMISSAO",
                             "AGUARDANDO_PAGAMENTO",
-                            "LIQUIDADO",
-                            "VENCIDO"
+                            "PAGO",
+                            "VENCIDO",
+                            "ENQUEUED",
+                            "PROCESSING",
+                            "ERROR",
+                            "CREATED",
+                            "PROCESSING_PAYMENT",
+                            "PAID",
+                            "REVERSED",
+                            "CANCELING",
+                            "CANCELED",
+                            "CANCEL_FAILED",
+                            "UPDATED",
+                            "UPDATED_FAILED"
                         ]
                     }
                 }
             },
-            "unidadeAssociadoResponse": {
+            "CondominioAssociadoResponse": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -1557,7 +1666,7 @@
                             "DOCUMENTO_FOTO_RESPONSAVEL_EMPRESA",
                             "CARTAO_CNPJ",
                             "DADOS_BANCARIOS",
-                            "CNPJ_unidade",
+                            "CNPJ_CONDOMINIO",
                             "CONVENCAO",
                             "ATA",
                             "RG_CNH_SINDICO",
@@ -1612,11 +1721,11 @@
                     }
                 }
             },
-            "ResponseDefaultunidadeDetalheResponse": {
+            "ResponseDefaultAdministradoraDetalheResponse": {
                 "type": "object",
                 "properties": {
                     "response": {
-                        "$ref": "#/components/schemas/unidadeDetalheResponse"
+                        "$ref": "#/components/schemas/AdministradoraDetalheResponse"
                     },
                     "status": {
                         "$ref": "#/components/schemas/StatusDefaultResponse"
@@ -1652,7 +1761,7 @@
                     }
                 }
             },
-            "unidadeInternalResponse": {
+            "AdministradoraInternalResponse": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -1673,18 +1782,18 @@
                     }
                 }
             },
-            "ResponseDefaultunidadeInternalResponse": {
+            "ResponseDefaultAdministradoraInternalResponse": {
                 "type": "object",
                 "properties": {
                     "response": {
-                        "$ref": "#/components/schemas/unidadeInternalResponse"
+                        "$ref": "#/components/schemas/AdministradoraInternalResponse"
                     },
                     "status": {
                         "$ref": "#/components/schemas/StatusDefaultResponse"
                     }
                 }
             },
-            "unidadeContaBancariaConsultaResponse": {
+            "AdministradoraContaBancariaConsultaResponse": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -1722,13 +1831,13 @@
                     }
                 }
             },
-            "ResponseDefaultListunidadeContaBancariaConsultaResponse": {
+            "ResponseDefaultListAdministradoraContaBancariaConsultaResponse": {
                 "type": "object",
                 "properties": {
                     "response": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/unidadeContaBancariaConsultaResponse"
+                            "$ref": "#/components/schemas/AdministradoraContaBancariaConsultaResponse"
                         }
                     },
                     "status": {

@@ -2,14 +2,11 @@ version: 0.2
 env:
   variables:
     ECS_SERVICE_NAME: $ECS_SERVICE_NAME
-    ENV:  $SPRING_PROFILES_ACTIVE
-    SWAGGER_BUCKET: $SPRING_PROFILES_ACTIVE-api-swagger
-    BASE_URI: https://$ECS_SERVICE_NAME.$ENV.llzgarantidora.com
+    ENVIRONMENT:  $ENVIRONMENT
+    SWAGGER_BUCKET: $ENVIRONMENT-api-swagger
+    BASE_URI: https://$ECS_SERVICE_NAME.$ENVIRONMENT.llzgarantidora.com
     OPENAPI_JSON_PATH: swagger/openapi.json
 phases:
   build:
     commands:
-      - |
-      - chmod +x swagger/apigateway-update.sh
-      - sed -i -e 's/\r$//' swagger/apigateway-update.sh
-      - ./swagger/apigateway-update.sh
+      - ./apigateway-update.sh
